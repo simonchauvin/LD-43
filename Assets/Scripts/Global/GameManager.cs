@@ -66,8 +66,8 @@ public class GameManager : MonoBehaviour
         firstOptionText = takeOrLeaveUI.transform.Find("FirstOptionText").GetComponent<Text>();
         secondOptionText = takeOrLeaveUI.transform.Find("SecondOptionText").GetComponent<Text>();
         descriptionText = takeOrLeaveUI.transform.Find("DescriptionText").GetComponent<Text>();
-        takeSelector = takeOrLeaveUI.transform.Find("TakeSelector").gameObject;
-        leaveSelector = takeOrLeaveUI.transform.Find("LeaveSelector").gameObject;
+        takeSelector = takeOrLeaveUI.transform.Find("FirstOptionSelector").gameObject;
+        leaveSelector = takeOrLeaveUI.transform.Find("SecondOptionSelector").gameObject;
         takeOrLeaveUI.SetActive(false);
 
         planet.Init();
@@ -117,7 +117,6 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Entity" + entity + "loaded");
         loadedEntities.Add(entity);
-        entity.Take();
     }
 
     public void ShowTakeOrLeaveUI(string firstOption, string secondOption, string description)
@@ -149,6 +148,16 @@ public class GameManager : MonoBehaviour
     {
         takeSelector.GetComponent<Text>().enabled = false;
         leaveSelector.GetComponent<Text>().enabled = true;
+    }
+
+    public void LeavePlanet()
+    {
+        Debug.Log("Leave planet now");
+    }
+
+    public float GetAsteroidDistanceToPlanet()
+    {
+        return asteroid.GetDistanceToPlanetNormalized();
     }
 
     public bool IsReady()

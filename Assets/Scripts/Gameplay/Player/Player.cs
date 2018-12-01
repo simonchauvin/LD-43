@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
     public float rotationSpeed;
     public float maxDistanceToPlanet;
     public float timeToLerpCamera;
+    public float maxShakeAmplitude;
+    public float maxShakeStopDuration;
 
     private Planet planet;
 
@@ -24,11 +26,14 @@ public class Player : MonoBehaviour
     private bool movingBackward;
     private bool rotateLeft;
     private bool rotateRight;
-    private bool takeSelected;
-    private bool leaveSelected;
+    private bool firstOptionSelected;
+    private bool secondOptionSelected;
     private bool bringCameraCloser;
     private bool resetCamera;
     private Vector3 startCameraPosition;
+    private Vector3 initialCameraLocalPosition;
+    private float shakeStopDuration;
+    private float shakeStopDurationTimer;
     private float timerLerpCamera;
 
 
@@ -47,11 +52,14 @@ public class Player : MonoBehaviour
         movingBackward = false;
         rotateLeft = false;
         rotateRight = false;
-        takeSelected = true;
-        leaveSelected = false;
+        firstOptionSelected = true;
+        secondOptionSelected = false;
         bringCameraCloser = false;
         resetCamera = false;
         startCameraPosition = mainCamera.transform.position;
+        initialCameraLocalPosition = mainCamera.transform.localPosition;
+        shakeStopDuration = 0;
+        shakeStopDurationTimer = 0;
         timerLerpCamera = 0;
     }
 	
@@ -73,6 +81,8 @@ public class Player : MonoBehaviour
                 {
                     mainCamera.transform.position = Vector3.Lerp(startCameraPosition, cameraCloseTargetPosition.position, Mathf.SmoothStep(0, 1, timerLerpCamera / timeToLerpCamera));
                     timerLerpCamera += Time.deltaTime;
+
+                    initialCameraLocalPosition = mainCamera.transform.localPosition;
                 }
                 else
                 {
@@ -81,25 +91,25 @@ public class Player : MonoBehaviour
                     if (translation > 0)
                     {
                         GameManager.instance.SelectTake();
-                        takeSelected = true;
-                        leaveSelected = false;
+                        firstOptionSelected = true;
+                        secondOptionSelected = false;
                     }
                     else if (translation < 0)
                     {
                         GameManager.instance.SelectLeave();
-                        takeSelected = false;
-                        leaveSelected = true;
+                        firstOptionSelected = false;
+                        secondOptionSelected = true;
                     }
 
                     if (Input.GetButton("Submit"))
                     {
-                        if (takeSelected)
+                        if (firstOptionSelected)
                         {
-                            GameManager.instance.LoadEntity(currentEntity);
+                            currentEntity.FirstOption();
                         }
-                        else if (leaveSelected)
+                        else if (secondOptionSelected)
                         {
-
+                            currentEntity.SecondOption();
                         }
 
                         bringCameraCloser = false;
@@ -117,6 +127,8 @@ public class Player : MonoBehaviour
                 {
                     mainCamera.transform.position = Vector3.Lerp(cameraCloseTargetPosition.position, startCameraPosition, Mathf.SmoothStep(0, 1, timerLerpCamera / timeToLerpCamera));
                     timerLerpCamera += Time.deltaTime;
+
+                    initialCameraLocalPosition = mainCamera.transform.localPosition;
                 }
                 else
                 {
@@ -125,6 +137,8 @@ public class Player : MonoBehaviour
 
                 StopMovement();
             }
+
+            ShakeCamera();
         }
     }
 
@@ -159,6 +173,22 @@ public class Player : MonoBehaviour
             {
                 _rigidbody.MoveRotation(_rigidbody.rotation * Quaternion.Euler(0, rotationSpeed * Time.deltaTime, 0));
             }
+        }
+    }
+
+    private void ShakeCamera()
+    {
+        if (shakeStopDurationTimer > shakeStopDuration)
+        {
+            Vector3 shake = Random.insideUnitCircle * Mathf.Lerp(0, maxShakeAmplitude, 1f - GameManager.instance.GetAsteroidDistanceToPlanet());
+            mainCamera.transform.localPosition = initialCameraLocalPosition + shake;
+
+            shakeStopDuration = Random.Range(0, maxShakeStopDuration);
+            shakeStopDurationTimer = 0;
+        }
+        else
+        {
+            shakeStopDurationTimer += Time.deltaTime;
         }
     }
 

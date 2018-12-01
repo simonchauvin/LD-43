@@ -104,7 +104,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1641270746471820}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6, y: 14, z: 6}
+  m_LocalPosition: {x: -6, y: 88, z: 6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4961911514994014}
@@ -120,13 +120,13 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1629970085533446}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.29, y: 5.57, z: -8.38}
+  m_LocalRotation: {x: 0.32556805, y: -0, z: -0, w: 0.9455186}
+  m_LocalPosition: {x: 0, y: 20.42, z: -33.21}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4220365022413900}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 38, y: 0, z: 0}
 --- !u!4 &4673606146385894
 Transform:
   m_ObjectHideFlags: 1
@@ -189,8 +189,8 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
-  orthographic size: 10
+  orthographic: 1
+  orthographic size: 40
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -328,7 +328,9 @@ MonoBehaviour:
   maxSpeed: 10
   rotationSpeed: 100
   maxDistanceToPlanet: 10
-  timeToLerpCamera: 2
+  timeToLerpCamera: 1
+  maxShakeAmplitude: 2
+  maxShakeStopDuration: 0.05
 --- !u!114 &114408028803426468
 MonoBehaviour:
   m_ObjectHideFlags: 1

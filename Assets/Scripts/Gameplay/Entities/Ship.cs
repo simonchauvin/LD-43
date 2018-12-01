@@ -5,11 +5,21 @@ using UnityEngine;
 public class Ship : Entity
 {
     
-	void Update ()
+	public override void Update ()
     {
-		if (GameManager.instance.IsReady())
+        if (GameManager.instance.IsReady())
         {
-
+            base.Update();
         }
 	}
+
+    public override void FirstOption()
+    {
+        
+    }
+
+    public override void SecondOption()
+    {
+        GameManager.instance.LeavePlanet();
+    }
 }

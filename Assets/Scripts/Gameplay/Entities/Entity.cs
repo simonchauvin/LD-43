@@ -11,12 +11,12 @@ public class Entity : MonoBehaviour
     private Player player;
 
 
-	public void Init(Player player)
+	public virtual void Init(Player player)
     {
         this.player = player;
     }
 	
-	void Update ()
+	public virtual void Update ()
     {
 		if (GameManager.instance.IsReady())
         {
@@ -38,8 +38,15 @@ public class Entity : MonoBehaviour
         transform.position = FindObjectOfType<Planet>().transform.position + (transform.position - FindObjectOfType<Planet>().transform.position).normalized * (FindObjectOfType<Planet>().GetComponent<Collider>().bounds.extents.x + GetComponent<MeshRenderer>().bounds.extents.y);
     }
 
-    public void Take()
+    public virtual void FirstOption()
     {
+        GameManager.instance.LoadEntity(this);
+
         GetComponent<MeshRenderer>().enabled = false;
+    }
+
+    public virtual void SecondOption()
+    {
+
     }
 }
