@@ -12,7 +12,6 @@ public class Asteroid : MonoBehaviour
     public void Init(Vector3 planetPosition)
     {
         direction = (planetPosition - transform.position).normalized;
-        transform.rotation = Quaternion.LookRotation(direction);
     }
 
     void Update ()

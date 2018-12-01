@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
-  m_Sun: {fileID: 721126740}
+  m_Sun: {fileID: 0}
   m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
@@ -541,6 +541,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 697527167}
   - {fileID: 808557403}
   - {fileID: 236957400}
   m_Father: {fileID: 0}
@@ -608,6 +609,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4220365022413900, guid: bbd0991b6130ebe42a07cab0f27a4de7,
     type: 2}
   m_PrefabInternal: {fileID: 600162010}
+--- !u!4 &697527167 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4639998288945878, guid: 794400f37fe0580468b2f27724619e4a,
+    type: 2}
+  m_PrefabInternal: {fileID: 1946268220}
 --- !u!1001 &721126739
 Prefab:
   m_ObjectHideFlags: 0
@@ -645,21 +651,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4866237661550722, guid: 8cecbc98bc0c9ce479bbe9377e1b6640, type: 2}
       propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 108683174462964938, guid: 8cecbc98bc0c9ce479bbe9377e1b6640,
-        type: 2}
-      propertyPath: m_Type
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8cecbc98bc0c9ce479bbe9377e1b6640, type: 2}
   m_IsPrefabAsset: 0
---- !u!108 &721126740 stripped
-Light:
-  m_CorrespondingSourceObject: {fileID: 108683174462964938, guid: 8cecbc98bc0c9ce479bbe9377e1b6640,
-    type: 2}
-  m_PrefabInternal: {fileID: 721126739}
 --- !u!4 &808557403 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4753710863603956, guid: edeea09de07ab2c4d9eb782fac5e4bb1,
@@ -998,7 +994,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4753710863603956, guid: edeea09de07ab2c4d9eb782fac5e4bb1, type: 2}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1354403229210190, guid: edeea09de07ab2c4d9eb782fac5e4bb1, type: 2}
       propertyPath: m_StaticEditorFlags
@@ -1219,3 +1215,45 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1931023165}
   m_CullTransparentMesh: 0
+--- !u!1001 &1946268220
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 590031274}
+    m_Modifications:
+    - target: {fileID: 4639998288945878, guid: 794400f37fe0580468b2f27724619e4a, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -500
+      objectReference: {fileID: 0}
+    - target: {fileID: 4639998288945878, guid: 794400f37fe0580468b2f27724619e4a, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 4639998288945878, guid: 794400f37fe0580468b2f27724619e4a, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4639998288945878, guid: 794400f37fe0580468b2f27724619e4a, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0.27059805
+      objectReference: {fileID: 0}
+    - target: {fileID: 4639998288945878, guid: 794400f37fe0580468b2f27724619e4a, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0.6532815
+      objectReference: {fileID: 0}
+    - target: {fileID: 4639998288945878, guid: 794400f37fe0580468b2f27724619e4a, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0.27059805
+      objectReference: {fileID: 0}
+    - target: {fileID: 4639998288945878, guid: 794400f37fe0580468b2f27724619e4a, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.6532815
+      objectReference: {fileID: 0}
+    - target: {fileID: 4639998288945878, guid: 794400f37fe0580468b2f27724619e4a, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 794400f37fe0580468b2f27724619e4a, type: 2}
+  m_IsPrefabAsset: 0

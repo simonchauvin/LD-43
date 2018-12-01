@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     private Planet planet;
     private Asteroid asteroid;
     private Camera mainCamera;
-    private Light asteroidLight;
+    private Light sunlight;
     private List<Entity> loadedEntities;
 
     private Canvas canvas;
@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
         entities = FindObjectsOfType<Entity>();
         planet = FindObjectOfType<Planet>();
         asteroid = FindObjectOfType<Asteroid>();
-        asteroidLight = FindObjectOfType<Light>();
+        sunlight = FindObjectOfType<Light>();
         loadedEntities = new List<Entity>();
 
         canvas = FindObjectOfType<Canvas>();
@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour
         introTimer = 0;
         ready = false;
         startAtmosphereColor = mainCamera.backgroundColor;
-        startLightColor = asteroidLight.color;
+        startLightColor = sunlight.color;
         startAsteroidDistance = (asteroid.transform.position - planet.transform.position).sqrMagnitude;
     }
 	
@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour
         if (ready)
         {
             mainCamera.backgroundColor = Color.Lerp(targetAtmosphereColor, startAtmosphereColor, (asteroid.transform.position - planet.transform.position).sqrMagnitude / startAsteroidDistance);
-            asteroidLight.color = Color.Lerp(targetLightColor, startLightColor, (asteroid.transform.position - planet.transform.position).sqrMagnitude / startAsteroidDistance);
+            sunlight.color = Color.Lerp(targetLightColor, startLightColor, (asteroid.transform.position - planet.transform.position).sqrMagnitude / startAsteroidDistance);
         }
         else
         {
