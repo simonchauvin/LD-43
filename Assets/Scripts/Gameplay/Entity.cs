@@ -27,7 +27,8 @@ public class Entity : MonoBehaviour
 
     public void Align()
     {
-        transform.up = (FindObjectOfType<Planet>().transform.position - transform.position).normalized;
+        transform.up = (transform.position - FindObjectOfType<Planet>().transform.position).normalized;
+        transform.position = FindObjectOfType<Planet>().transform.position + (transform.position - FindObjectOfType<Planet>().transform.position).normalized * (FindObjectOfType<Planet>().GetComponent<Collider>().bounds.extents.x + GetComponent<MeshRenderer>().bounds.extents.y);
     }
 
     public void Take()
