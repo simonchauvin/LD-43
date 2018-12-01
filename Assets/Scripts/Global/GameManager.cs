@@ -30,8 +30,7 @@ public class GameManager : MonoBehaviour
     private Light sunlight;
     private List<Entity> loadedEntities;
 
-    private Canvas canvas;
-    private GameObject introUI;
+    private Transform introUI;
     private Image introPanel;
     private Text introText;
     private GameObject takeOrLeaveUI;
@@ -57,18 +56,17 @@ public class GameManager : MonoBehaviour
         sunlight = FindObjectOfType<Light>();
         loadedEntities = new List<Entity>();
 
-        canvas = FindObjectOfType<Canvas>();
-        introUI = canvas.transform.Find("IntroUI").gameObject;
-        introPanel = introUI.transform.Find("Panel").GetComponent<Image>();
-        introText = introUI.transform.Find("Text").GetComponent<Text>();
-        introUI.SetActive(true);
-        takeOrLeaveUI = canvas.transform.Find("TakeOrLeaveUI").gameObject;
+        introUI = GameObject.Find("MenuCanvas").transform.Find("IntroUI").transform;
+        introPanel = introUI.Find("Panel").GetComponent<Image>();
+        introText = introUI.Find("Text").GetComponent<Text>();
+        introUI.gameObject.SetActive(true);
+        takeOrLeaveUI = GameObject.Find("InGameCanvas").transform.Find("TakeOrLeaveUI").gameObject;
         firstOptionText = takeOrLeaveUI.transform.Find("FirstOptionText").GetComponent<Text>();
         secondOptionText = takeOrLeaveUI.transform.Find("SecondOptionText").GetComponent<Text>();
         descriptionText = takeOrLeaveUI.transform.Find("DescriptionText").GetComponent<Text>();
         takeSelector = takeOrLeaveUI.transform.Find("FirstOptionSelector").gameObject;
         leaveSelector = takeOrLeaveUI.transform.Find("SecondOptionSelector").gameObject;
-        takeOrLeaveUI.SetActive(false);
+        takeOrLeaveUI.gameObject.SetActive(false);
 
         planet.Init();
         asteroid.Init(planet.transform.position);
