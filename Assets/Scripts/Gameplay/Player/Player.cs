@@ -76,7 +76,7 @@ public class Player : MonoBehaviour
                 }
                 else
                 {
-                    GameManager.instance.ShowTakeOrLeaveUI(currentEntity.description);
+                    GameManager.instance.ShowTakeOrLeaveUI(currentEntity.firstOption, currentEntity.secondOption, currentEntity.description);
 
                     if (translation > 0)
                     {

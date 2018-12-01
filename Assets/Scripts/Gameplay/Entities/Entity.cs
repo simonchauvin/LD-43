@@ -5,6 +5,8 @@ using UnityEngine;
 public class Entity : MonoBehaviour
 {
     public string description;
+    public string firstOption;
+    public string secondOption;
 
     private Player player;
 

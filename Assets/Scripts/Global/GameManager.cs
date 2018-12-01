@@ -35,7 +35,9 @@ public class GameManager : MonoBehaviour
     private Image introPanel;
     private Text introText;
     private GameObject takeOrLeaveUI;
-    private GameObject descriptionText;
+    private Text firstOptionText;
+    private Text secondOptionText;
+    private Text descriptionText;
     private GameObject takeSelector;
     private GameObject leaveSelector;
 
@@ -61,7 +63,9 @@ public class GameManager : MonoBehaviour
         introText = introUI.transform.Find("Text").GetComponent<Text>();
         introUI.SetActive(true);
         takeOrLeaveUI = canvas.transform.Find("TakeOrLeaveUI").gameObject;
-        descriptionText = takeOrLeaveUI.transform.Find("DescriptionText").gameObject;
+        firstOptionText = takeOrLeaveUI.transform.Find("FirstOptionText").GetComponent<Text>();
+        secondOptionText = takeOrLeaveUI.transform.Find("SecondOptionText").GetComponent<Text>();
+        descriptionText = takeOrLeaveUI.transform.Find("DescriptionText").GetComponent<Text>();
         takeSelector = takeOrLeaveUI.transform.Find("TakeSelector").gameObject;
         leaveSelector = takeOrLeaveUI.transform.Find("LeaveSelector").gameObject;
         takeOrLeaveUI.SetActive(false);
@@ -116,12 +120,14 @@ public class GameManager : MonoBehaviour
         entity.Take();
     }
 
-    public void ShowTakeOrLeaveUI(string description)
+    public void ShowTakeOrLeaveUI(string firstOption, string secondOption, string description)
     {
         if (!takeOrLeaveUI.activeSelf)
         {
             takeOrLeaveUI.SetActive(true);
             descriptionText.GetComponent<Text>().text = description;
+            firstOptionText.text = firstOption;
+            secondOptionText.text = secondOption;
             descriptionText.GetComponent<Text>().enabled = true;
             takeSelector.GetComponent<Text>().enabled = true;
             leaveSelector.GetComponent<Text>().enabled = false;
