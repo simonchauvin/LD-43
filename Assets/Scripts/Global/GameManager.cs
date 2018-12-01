@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     public float introTime;
     public Color targetAtmosphereColor;
     public Color targetLightColor;
+    public float maxDustRate;
 
     private Player player;
     private Entity[] entities;
@@ -28,6 +29,7 @@ public class GameManager : MonoBehaviour
     private Asteroid asteroid;
     private Camera mainCamera;
     private Light sunlight;
+    private ParticleSystem.EmissionModule dustStorm;
     private List<Entity> loadedEntities;
 
     private Transform introUI;
@@ -54,6 +56,7 @@ public class GameManager : MonoBehaviour
         planet = FindObjectOfType<Planet>();
         asteroid = FindObjectOfType<Asteroid>();
         sunlight = FindObjectOfType<Light>();
+        dustStorm = FindObjectOfType<ParticleSystem>().emission;
         loadedEntities = new List<Entity>();
 
         introUI = GameObject.Find("MenuCanvas").transform.Find("IntroUI").transform;
@@ -90,6 +93,8 @@ public class GameManager : MonoBehaviour
         {
             mainCamera.backgroundColor = Color.Lerp(targetAtmosphereColor, startAtmosphereColor, (asteroid.transform.position - planet.transform.position).sqrMagnitude / startAsteroidDistance);
             sunlight.color = Color.Lerp(targetLightColor, startLightColor, (asteroid.transform.position - planet.transform.position).sqrMagnitude / startAsteroidDistance);
+
+            dustStorm.rateOverTime = Mathf.Lerp(0, maxDustRate, 1f - GetAsteroidDistanceToPlanetNormalized());
         }
         else
         {
@@ -153,7 +158,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Leave planet now");
     }
 
-    public float GetAsteroidDistanceToPlanet()
+    public float GetAsteroidDistanceToPlanetNormalized()
     {
         return asteroid.GetDistanceToPlanetNormalized();
     }

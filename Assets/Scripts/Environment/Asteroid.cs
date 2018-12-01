@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class Asteroid : MonoBehaviour
 {
-    public float speed;
+    public float acceleration;
+    public float maxScale;
 
     private Vector3 direction;
     private Vector3 planetPosition;
+    private float speed;
     private float startDistance;
 
 
@@ -15,6 +17,7 @@ public class Asteroid : MonoBehaviour
     {
         this.planetPosition = planetPosition;
         direction = (planetPosition - transform.position).normalized;
+        speed = 0;
         startDistance = (planetPosition - transform.position).magnitude;
     }
 
@@ -22,7 +25,10 @@ public class Asteroid : MonoBehaviour
     {
         if (GameManager.instance.IsReady())
         {
+            speed += acceleration * Time.deltaTime;
             transform.position += direction * speed * Time.deltaTime;
+
+            transform.localScale = Vector3.one * Mathf.Lerp(1, maxScale, 1f - GetDistanceToPlanetNormalized());
         }
 	}
 

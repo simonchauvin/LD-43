@@ -182,7 +182,7 @@ public class Player : MonoBehaviour
     {
         if (shakeStopDurationTimer > shakeStopDuration)
         {
-            Vector3 shake = Random.insideUnitCircle * Mathf.Lerp(0, maxShakeAmplitude, 1f - GameManager.instance.GetAsteroidDistanceToPlanet());
+            Vector3 shake = Random.insideUnitCircle * Mathf.Lerp(0, maxShakeAmplitude, 1f - GameManager.instance.GetAsteroidDistanceToPlanetNormalized());
             mainCamera.transform.localPosition = initialCameraLocalPosition + shake;
 
             shakeStopDuration = Random.Range(0, maxShakeStopDuration);

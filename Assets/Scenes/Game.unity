@@ -882,6 +882,7 @@ MonoBehaviour:
   introTime: 2
   targetAtmosphereColor: {r: 0, g: 0, b: 0, a: 0}
   targetLightColor: {r: 0, g: 0, b: 0, a: 0}
+  maxDustRate: 300
 --- !u!1 &1060790627
 GameObject:
   m_ObjectHideFlags: 0
