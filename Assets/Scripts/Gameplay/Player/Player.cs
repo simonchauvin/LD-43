@@ -57,102 +57,108 @@ public class Player : MonoBehaviour
 	
 	void Update()
     {
-        float translation = Input.GetAxis("Vertical"),
+        if (GameManager.instance.IsReady())
+        {
+            float translation = Input.GetAxis("Vertical"),
             rotation = Input.GetAxis("Horizontal");
 
-        movingForward = translation > 0;
-        movingBackward = translation < 0;
-        rotateLeft = rotation < 0;
-        rotateRight = rotation > 0;
+            movingForward = translation > 0;
+            movingBackward = translation < 0;
+            rotateLeft = rotation < 0;
+            rotateRight = rotation > 0;
 
-        if (bringCameraCloser)
-        {
-            if (timerLerpCamera <= timeToLerpCamera)
+            if (bringCameraCloser)
             {
-                mainCamera.transform.position = Vector3.Lerp(startCameraPosition, cameraCloseTargetPosition.position, Mathf.SmoothStep(0, 1, timerLerpCamera / timeToLerpCamera));
-                timerLerpCamera += Time.deltaTime;
-            }
-            else
-            {
-                GameManager.instance.ShowTakeOrLeaveUI();
-
-                if (translation > 0)
+                if (timerLerpCamera <= timeToLerpCamera)
                 {
-                    GameManager.instance.SelectTake();
-                    takeSelected = true;
-                    leaveSelected = false;
+                    mainCamera.transform.position = Vector3.Lerp(startCameraPosition, cameraCloseTargetPosition.position, Mathf.SmoothStep(0, 1, timerLerpCamera / timeToLerpCamera));
+                    timerLerpCamera += Time.deltaTime;
                 }
-                else if (translation < 0)
+                else
                 {
-                    GameManager.instance.SelectLeave();
-                    takeSelected = false;
-                    leaveSelected = true;
-                }
+                    GameManager.instance.ShowTakeOrLeaveUI(currentEntity.description);
 
-                if (Input.GetButton("Submit"))
-                {
-                    if (takeSelected)
+                    if (translation > 0)
                     {
-                        GameManager.instance.LoadEntity(currentEntity);
+                        GameManager.instance.SelectTake();
+                        takeSelected = true;
+                        leaveSelected = false;
                     }
-                    else if (leaveSelected)
+                    else if (translation < 0)
                     {
-                        
+                        GameManager.instance.SelectLeave();
+                        takeSelected = false;
+                        leaveSelected = true;
                     }
 
-                    bringCameraCloser = false;
-                    ResetCamera();
-                    GameManager.instance.HideTakeOrLeaveUI();
+                    if (Input.GetButton("Submit"))
+                    {
+                        if (takeSelected)
+                        {
+                            GameManager.instance.LoadEntity(currentEntity);
+                        }
+                        else if (leaveSelected)
+                        {
+
+                        }
+
+                        bringCameraCloser = false;
+                        ResetCamera();
+                        GameManager.instance.HideTakeOrLeaveUI();
+                    }
                 }
+
+                StopMovement();
             }
 
-            StopMovement();
-        }
-
-        if (resetCamera)
-        {
-            if (timerLerpCamera <= timeToLerpCamera)
+            if (resetCamera)
             {
-                mainCamera.transform.position = Vector3.Lerp(cameraCloseTargetPosition.position, startCameraPosition, Mathf.SmoothStep(0, 1, timerLerpCamera / timeToLerpCamera));
-                timerLerpCamera += Time.deltaTime;
-            }
-            else
-            {
-                resetCamera = false;
-            }
+                if (timerLerpCamera <= timeToLerpCamera)
+                {
+                    mainCamera.transform.position = Vector3.Lerp(cameraCloseTargetPosition.position, startCameraPosition, Mathf.SmoothStep(0, 1, timerLerpCamera / timeToLerpCamera));
+                    timerLerpCamera += Time.deltaTime;
+                }
+                else
+                {
+                    resetCamera = false;
+                }
 
-            StopMovement();
+                StopMovement();
+            }
         }
     }
 
     void FixedUpdate()
     {
-        // Gravity
-        toPlanetVector = planet.transform.position - _rigidbody.position;
-        _rigidbody.AddForce(toPlanetVector.normalized * Mathf.Clamp01(maxDistanceToPlanet / (toPlanetVector.magnitude - planetRadius)) * gravityForce);
-        _rigidbody.rotation = Quaternion.FromToRotation(transform.up, -toPlanetVector.normalized) * _rigidbody.rotation;
+        if (GameManager.instance.IsReady())
+        {
+            // Gravity
+            toPlanetVector = planet.transform.position - _rigidbody.position;
+            _rigidbody.AddForce(toPlanetVector.normalized * (1f - Mathf.Clamp01((toPlanetVector.magnitude - planetRadius) / maxDistanceToPlanet)) * gravityForce);
+            _rigidbody.rotation = Quaternion.FromToRotation(transform.up, -toPlanetVector.normalized) * _rigidbody.rotation;
 
-        // Movement
-        if (Mathf.Abs(Vector3.Dot(transform.forward, _rigidbody.velocity)) < maxSpeed)
-        {
-            if (movingForward)
+            // Movement
+            if (Mathf.Abs(Vector3.Dot(transform.forward, _rigidbody.velocity)) < maxSpeed)
             {
-                _rigidbody.AddForce(transform.forward * speed, ForceMode.Impulse);
+                if (movingForward)
+                {
+                    _rigidbody.AddForce(transform.forward * speed, ForceMode.Impulse);
+                }
+                else if (movingBackward)
+                {
+                    _rigidbody.AddForce(-transform.forward * speed, ForceMode.Impulse);
+                }
             }
-            else if (movingBackward)
-            {
-                _rigidbody.AddForce(-transform.forward * speed, ForceMode.Impulse);
-            }
-        }
-        
-        if (rotateLeft)
-        {
-            _rigidbody.MoveRotation(_rigidbody.rotation * Quaternion.Euler(0, -rotationSpeed * Time.deltaTime, 0));
-        }
 
-        if (rotateRight)
-        {
-            _rigidbody.MoveRotation(_rigidbody.rotation * Quaternion.Euler(0, rotationSpeed * Time.deltaTime, 0));
+            if (rotateLeft)
+            {
+                _rigidbody.MoveRotation(_rigidbody.rotation * Quaternion.Euler(0, -rotationSpeed * Time.deltaTime, 0));
+            }
+
+            if (rotateRight)
+            {
+                _rigidbody.MoveRotation(_rigidbody.rotation * Quaternion.Euler(0, rotationSpeed * Time.deltaTime, 0));
+            }
         }
     }
 

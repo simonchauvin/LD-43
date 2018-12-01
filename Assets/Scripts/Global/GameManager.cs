@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public float introTime;
     public Color targetAtmosphereColor;
     public Color targetLightColor;
 
@@ -30,10 +31,16 @@ public class GameManager : MonoBehaviour
     private List<Entity> loadedEntities;
 
     private Canvas canvas;
+    private GameObject introUI;
+    private Image introPanel;
+    private Text introText;
     private GameObject takeOrLeaveUI;
+    private GameObject descriptionText;
     private GameObject takeSelector;
     private GameObject leaveSelector;
 
+    private float introTimer;
+    private bool ready;
     private float startAsteroidDistance;
     private Color startAtmosphereColor;
     private Color startLightColor;
@@ -46,13 +53,18 @@ public class GameManager : MonoBehaviour
         planet = FindObjectOfType<Planet>();
         asteroid = FindObjectOfType<Asteroid>();
         asteroidLight = FindObjectOfType<Light>();
+        loadedEntities = new List<Entity>();
 
         canvas = FindObjectOfType<Canvas>();
+        introUI = canvas.transform.Find("IntroUI").gameObject;
+        introPanel = introUI.transform.Find("Panel").GetComponent<Image>();
+        introText = introUI.transform.Find("Text").GetComponent<Text>();
+        introUI.SetActive(true);
         takeOrLeaveUI = canvas.transform.Find("TakeOrLeaveUI").gameObject;
+        descriptionText = takeOrLeaveUI.transform.Find("DescriptionText").gameObject;
         takeSelector = takeOrLeaveUI.transform.Find("TakeSelector").gameObject;
         leaveSelector = takeOrLeaveUI.transform.Find("LeaveSelector").gameObject;
         takeOrLeaveUI.SetActive(false);
-        loadedEntities = new List<Entity>();
 
         planet.Init();
         asteroid.Init(planet.transform.position);
@@ -61,8 +73,10 @@ public class GameManager : MonoBehaviour
         {
             entities[i].Init(player);
         }
-
+        
         mainCamera = player.GetCamera();
+        introTimer = 0;
+        ready = false;
         startAtmosphereColor = mainCamera.backgroundColor;
         startLightColor = asteroidLight.color;
         startAsteroidDistance = (asteroid.transform.position - planet.transform.position).sqrMagnitude;
@@ -70,8 +84,29 @@ public class GameManager : MonoBehaviour
 	
 	void Update ()
     {
-        mainCamera.backgroundColor = Color.Lerp(targetAtmosphereColor, startAtmosphereColor, (asteroid.transform.position - planet.transform.position).sqrMagnitude / startAsteroidDistance);
-        asteroidLight.color = Color.Lerp(targetLightColor, startLightColor, (asteroid.transform.position - planet.transform.position).sqrMagnitude / startAsteroidDistance);
+        if (ready)
+        {
+            mainCamera.backgroundColor = Color.Lerp(targetAtmosphereColor, startAtmosphereColor, (asteroid.transform.position - planet.transform.position).sqrMagnitude / startAsteroidDistance);
+            asteroidLight.color = Color.Lerp(targetLightColor, startLightColor, (asteroid.transform.position - planet.transform.position).sqrMagnitude / startAsteroidDistance);
+        }
+        else
+        {
+            if (introTimer <= introTime)
+            {
+                introPanel.color = Color.Lerp(Color.black, new Color(0, 0, 0, 0), introTimer / introTime);
+                introTimer += Time.deltaTime;
+
+                if (introTimer >= introTime * 0.5f)
+                {
+                    introText.enabled = false;
+                }
+            }
+            else
+            {
+                introPanel.enabled = false;
+                ready = true;
+            }
+        }
     }
 
     public void LoadEntity(Entity entity)
@@ -81,11 +116,13 @@ public class GameManager : MonoBehaviour
         entity.Take();
     }
 
-    public void ShowTakeOrLeaveUI()
+    public void ShowTakeOrLeaveUI(string description)
     {
         if (!takeOrLeaveUI.activeSelf)
         {
             takeOrLeaveUI.SetActive(true);
+            descriptionText.GetComponent<Text>().text = description;
+            descriptionText.GetComponent<Text>().enabled = true;
             takeSelector.GetComponent<Text>().enabled = true;
             leaveSelector.GetComponent<Text>().enabled = false;
         }
@@ -106,6 +143,11 @@ public class GameManager : MonoBehaviour
     {
         takeSelector.GetComponent<Text>().enabled = false;
         leaveSelector.GetComponent<Text>().enabled = true;
+    }
+
+    public bool IsReady()
+    {
+        return ready;
     }
 
     public void GameOver()

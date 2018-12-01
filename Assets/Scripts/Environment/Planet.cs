@@ -18,7 +18,10 @@ public class Planet : MonoBehaviour
 	
 	void Update ()
     {
-		
+		if (GameManager.instance.IsReady())
+        {
+
+        }
 	}
 
     public float GetRadius()

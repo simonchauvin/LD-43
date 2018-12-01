@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
+    public string description;
+
     private Player player;
 
 
@@ -14,7 +16,10 @@ public class Entity : MonoBehaviour
 	
 	void Update ()
     {
-		
+		if (GameManager.instance.IsReady())
+        {
+
+        }
 	}
 
     private void OnTriggerEnter(Collider other)
