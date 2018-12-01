@@ -112,6 +112,8 @@ public class Player : MonoBehaviour
                             currentEntity.SecondOption();
                         }
 
+                        firstOptionSelected = true;
+                        secondOptionSelected = false;
                         bringCameraCloser = false;
                         ResetCamera();
                         GameManager.instance.HideTakeOrLeaveUI();
