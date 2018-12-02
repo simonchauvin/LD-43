@@ -72,6 +72,7 @@ GameObject:
   - component: {fileID: 4220365022413900}
   - component: {fileID: 54775896839407274}
   - component: {fileID: 114089516497458482}
+  - component: {fileID: 114206522905712404}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -103,8 +104,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1641270746471820}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6, y: 88, z: 6}
+  m_LocalRotation: {x: -0.10475907, y: -0, z: 0.119044386, w: 0.98734695}
+  m_LocalPosition: {x: -23.390081, y: 94.49594, z: -20.583273}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4961911514994014}
@@ -331,6 +332,18 @@ MonoBehaviour:
   timeToLerpCamera: 1
   maxShakeAmplitude: 2
   maxShakeStopDuration: 0.05
+--- !u!114 &114206522905712404
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1641270746471820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4d25d9683aca75419499db5fdb06610, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  margin: 0.5
 --- !u!114 &114408028803426468
 MonoBehaviour:
   m_ObjectHideFlags: 1
