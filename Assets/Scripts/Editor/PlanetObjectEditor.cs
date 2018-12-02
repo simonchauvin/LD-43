@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(Entity), true)]
-public class EntityEditor : Editor
+[CustomEditor(typeof(PlanetObject))]
+public class PlanetObjectEditor : Editor
 {
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector();
 
-        Entity entity = (Entity)target;
+        PlanetObject obj = (PlanetObject)target;
         if (GUILayout.Button("Align"))
         {
-            entity.Align();
+            obj.Align();
         }
     }
 }

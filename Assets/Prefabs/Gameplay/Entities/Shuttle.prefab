@@ -38,6 +38,7 @@ GameObject:
   - component: {fileID: 4842318699945242}
   - component: {fileID: 65525438170988406}
   - component: {fileID: 114045253163833780}
+  - component: {fileID: 114554891642962074}
   m_Layer: 0
   m_Name: Shuttle
   m_TagString: Untagged
@@ -213,3 +214,14 @@ MonoBehaviour:
   description: The shuttle
   firstOption: Stay
   secondOption: Leave now
+--- !u!114 &114554891642962074
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1553942839549848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4d25d9683aca75419499db5fdb06610, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
