@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(Entity))]
+[CustomEditor(typeof(Entity), true)]
 public class EntityEditor : Editor
 {
     public override void OnInspectorGUI()
