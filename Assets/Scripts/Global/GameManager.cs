@@ -156,6 +156,33 @@ public class GameManager : MonoBehaviour
     public void LeavePlanet()
     {
         Debug.Log("Leave planet now");
+
+        float knowledgeScore = 0,
+            peoplegeScore = 0,
+            natureScore = 0,
+            artScore = 0;
+        for (int i = 0; i < loadedEntities.Count; i++)
+        {
+            switch(loadedEntities[i].kind)
+            {
+                case EntityKind.Knowledge:
+                    knowledgeScore++;
+                    break;
+                case EntityKind.People:
+                    peoplegeScore++;
+                    break;
+                case EntityKind.Nature:
+                    natureScore++;
+                    break;
+                case EntityKind.Art:
+                    artScore++;
+                    break;
+            }
+        }
+        Debug.Log("Knowledge score: " + knowledgeScore);
+        Debug.Log("People score: " + peoplegeScore);
+        Debug.Log("Nature score: " + natureScore);
+        Debug.Log("Art score: " + artScore);
     }
 
     public float GetAsteroidDistanceToPlanetNormalized()
