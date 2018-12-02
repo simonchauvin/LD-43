@@ -4,14 +4,18 @@ using UnityEngine;
 
 public class Planet : MonoBehaviour
 {
+    public float maxDustRate;
+
     private MeshCollider _collider;
+    private ParticleSystem.EmissionModule dustStorm;
 
     private float radius;
 
     
 	public void Init()
     {
-        _collider = GetComponent<MeshCollider>();
+        _collider = GetComponentInChildren<MeshCollider>();
+        dustStorm = GetComponent<ParticleSystem>().emission;
 
         radius = _collider.bounds.extents.x;
     }
@@ -20,7 +24,7 @@ public class Planet : MonoBehaviour
     {
 		if (GameManager.instance.IsReady())
         {
-
+            dustStorm.rateOverTime = Mathf.Lerp(0, maxDustRate, 1f - GameManager.instance.GetAsteroidDistanceToPlanetNormalized());
         }
 	}
 
