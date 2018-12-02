@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class PlanetObject : MonoBehaviour
 {
+    public float margin;
+
     public void Align()
     {
         transform.up = (transform.position - FindObjectOfType<Planet>().transform.position).normalized;
-        transform.position = FindObjectOfType<Planet>().transform.position + (transform.position - FindObjectOfType<Planet>().transform.position).normalized * FindObjectOfType<Planet>().GetComponent<Collider>().bounds.extents.x;
+        transform.position = FindObjectOfType<Planet>().transform.position + (transform.position - FindObjectOfType<Planet>().transform.position).normalized * (FindObjectOfType<Planet>().GetComponent<Collider>().bounds.extents.x - margin);
     }
 }
