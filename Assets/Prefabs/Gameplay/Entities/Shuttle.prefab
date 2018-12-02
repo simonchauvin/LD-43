@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4757192609323218}
   - component: {fileID: 33691952969750268}
   - component: {fileID: 23524758710925396}
-  - component: {fileID: 135592598466475000}
   m_Layer: 0
   m_Name: Shuttle
   m_TagString: Untagged
@@ -37,6 +36,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4842318699945242}
+  - component: {fileID: 65525438170988406}
   - component: {fileID: 114045253163833780}
   m_Layer: 0
   m_Name: Shuttle
@@ -187,6 +187,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1478342164897756}
   m_Mesh: {fileID: 4300000, guid: 8bb002395a7f84d478a0faa317d24d33, type: 3}
+--- !u!65 &65525438170988406
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1553942839549848}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 40, y: 20, z: 30}
+  m_Center: {x: 0, y: 3.68, z: 0}
 --- !u!114 &114045253163833780
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -201,15 +213,3 @@ MonoBehaviour:
   description: The shuttle
   firstOption: Stay
   secondOption: Leave now
---- !u!135 &135592598466475000
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1478342164897756}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 17
-  m_Center: {x: 0, y: 0, z: 0}
