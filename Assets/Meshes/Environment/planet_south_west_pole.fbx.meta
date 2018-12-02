@@ -1,62 +1,14 @@
 fileFormatVersion: 2
-guid: 6a061d40c2a2e3848be123692a265637
+guid: 4aa401ced9e83764392a705aada255d4
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
-    100002: PlanetNorthPole
-    100004: PlanetSouthPole
-    100006: PlanetNorthPole_001
-    100008: PlanetSouthPole_001
-    100010: PlanetNorthEastPole
-    100012: PlanetNorthWestPole_001
-    100014: PlanetSouthEastPole
-    100016: PlanetSouthWestPole
-    100018: PlanetNorthWestPole
     400000: //RootNode
-    400002: PlanetNorthPole
-    400004: PlanetSouthPole
-    400006: PlanetNorthPole_001
-    400008: PlanetSouthPole_001
-    400010: PlanetNorthEastPole
-    400012: PlanetNorthWestPole_001
-    400014: PlanetSouthEastPole
-    400016: PlanetSouthWestPole
-    400018: PlanetNorthWestPole
-    2100000: unnamed
+    2100000: No Name
     2300000: //RootNode
-    2300002: PlanetNorthPole
-    2300004: PlanetSouthPole
-    2300006: PlanetNorthPole_001
-    2300008: PlanetSouthPole_001
-    2300010: PlanetNorthEastPole
-    2300012: PlanetNorthWestPole_001
-    2300014: PlanetSouthEastPole
-    2300016: PlanetSouthWestPole
-    2300018: PlanetNorthWestPole
     3300000: //RootNode
-    3300002: PlanetNorthPole
-    3300004: PlanetSouthPole
-    3300006: PlanetNorthPole_001
-    3300008: PlanetSouthPole_001
-    3300010: PlanetNorthEastPole
-    3300012: PlanetNorthWestPole_001
-    3300014: PlanetSouthEastPole
-    3300016: PlanetSouthWestPole
-    3300018: PlanetNorthWestPole
-    4300000: Icosphere
-    4300002: Planet
-    4300004: PlanetNorthPole
-    4300006: PlanetSouthPole
-    4300008: PlanetSouthPole_001
-    4300010: PlanetNorthPole_001
-    4300012: PlanetSouthWestPole
-    4300014: PlanetNorthWestPole_001
-    4300016: PlanetNorthEastPole
-    4300018: PlanetSouthEastPole
-    4300020: PlanetNorthWestPole
-    7400000: Default Take
-    9500000: //RootNode
+    4300000: PlanetSouthWestPole
   externalObjects: {}
   materials:
     importMaterials: 0
@@ -88,7 +40,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 200
     meshCompression: 0
     addColliders: 0
     importVisibility: 1
@@ -109,7 +61,7 @@ ModelImporter:
     secondaryUVPackMargin: 4
     useFileScale: 1
     previousCalculatedGlobalScale: 1
-    hasPreviousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
