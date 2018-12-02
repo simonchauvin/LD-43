@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     }
 
     public float introTime;
+    public float timeToQuit;
     public Color targetAtmosphereColor;
     public Color targetLightColor;
 
@@ -41,10 +42,12 @@ public class GameManager : MonoBehaviour
     private GameObject leaveSelector;
 
     private float introTimer;
+    private float quitTimer;
     private bool ready;
     private float startAsteroidDistance;
     private Color startAtmosphereColor;
     private Color startLightColor;
+    private Color fadeQuitColor;
 
 
     void Start ()
@@ -78,6 +81,7 @@ public class GameManager : MonoBehaviour
         
         mainCamera = player.GetCamera();
         introTimer = 0;
+        quitTimer = 0;
         ready = false;
         startAtmosphereColor = mainCamera.backgroundColor;
         startLightColor = sunlight.color;
@@ -88,6 +92,30 @@ public class GameManager : MonoBehaviour
     {
         if (ready)
         {
+            if (Input.GetButtonDown("Cancel"))
+            {
+                quitTimer = 0;
+                introPanel.enabled = true;
+            }
+            if (Input.GetButton("Cancel"))
+            {
+                introPanel.color = Color.Lerp(new Color(0, 0, 0, 0), new Color(0, 0, 0, 1), quitTimer / timeToQuit);
+                fadeQuitColor = introPanel.color;
+                quitTimer += Time.deltaTime;
+                if (quitTimer >= timeToQuit)
+                {
+                    Application.Quit();
+                }
+            }
+            else if (quitTimer > 0)
+            {
+                introPanel.color = Color.Lerp(new Color(0, 0, 0, 0), fadeQuitColor, quitTimer / timeToQuit);
+                quitTimer -= Time.deltaTime;
+            }
+            else
+            {
+                introPanel.enabled = false;
+            }
             mainCamera.backgroundColor = Color.Lerp(targetAtmosphereColor, startAtmosphereColor, (asteroid.transform.position - planet.transform.position).sqrMagnitude / startAsteroidDistance);
             sunlight.color = Color.Lerp(targetLightColor, startLightColor, (asteroid.transform.position - planet.transform.position).sqrMagnitude / startAsteroidDistance);
         }
