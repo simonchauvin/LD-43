@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47ec177624ec491439bcc9040ad0a9c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  introTime: 2
+  introTime: 5
   timeToQuit: 2
   timeToLeave: 2
   targetAtmosphereColor: {r: 1, g: 0.53464276, b: 0.16509432, a: 1}
@@ -63,7 +63,7 @@ MonoBehaviour:
     minNatureProportion: 0.1
     minArtProportion: 0.1
   winTexts:
-    lost: But it wasn't enough.
+    lost: And it wasn't enough.
     win: You found a way to make it work.
     tooFewKnowledge: You wandered aimlessly through the dark empty space until the
       end.
