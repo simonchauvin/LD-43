@@ -10,14 +10,17 @@ public class Player : MonoBehaviour
     public float rotationSpeed;
     public float maxDistanceToPlanet;
     public float timeToLerpCamera;
+    public float maxHeadHeight;
     public float defaultCameraSize;
     public float interactCameraSize;
     public float maxShakeAmplitude;
     public float maxShakeStopDuration;
+    public float timeToMoveHead;
 
     private Planet planet;
 
     private Rigidbody _rigidbody;
+    private Transform head;
     private Camera mainCamera;
     private Entity currentEntity;
 
@@ -34,7 +37,16 @@ public class Player : MonoBehaviour
     private float shakeStopDuration;
     private float shakeStopDurationTimer;
     private float timerLerpCamera;
+    private float headMoveTimer;
+    private Vector3 originalHeadPosition;
+    private float startHeadHeight;
+    private float targetHeadHeight;
 
+    private void Awake()
+    {
+        head = transform.Find("Head");
+        originalHeadPosition = head.localPosition;
+    }
 
     public void Init(Planet planet, Transform start)
     {
@@ -44,9 +56,11 @@ public class Player : MonoBehaviour
 
         _rigidbody = GetComponent<Rigidbody>();
         _rigidbody.velocity = Vector3.zero;
+        
         mainCamera = GetComponentInChildren<Camera>();
         mainCamera.orthographicSize = defaultCameraSize;
         currentEntity = null;
+        head.localPosition = originalHeadPosition;
 
         toPlanetVector = planet.transform.position - _rigidbody.position;
         planetRadius = planet.GetRadius();
@@ -61,6 +75,9 @@ public class Player : MonoBehaviour
         shakeStopDuration = 0;
         shakeStopDurationTimer = 0;
         timerLerpCamera = 0;
+        headMoveTimer = 0;
+        startHeadHeight = head.localPosition.y;
+        targetHeadHeight = originalHeadPosition.y + maxHeadHeight;
     }
 	
 	void Update()
@@ -170,6 +187,27 @@ public class Player : MonoBehaviour
             if (rotateRight)
             {
                 _rigidbody.MoveRotation(_rigidbody.rotation * Quaternion.Euler(0, rotationSpeed * Time.deltaTime, 0));
+            }
+
+            if (_rigidbody.velocity.magnitude > 0.1f)
+            {
+                head.localPosition = new Vector3(head.localPosition.x, Mathf.Lerp(startHeadHeight, targetHeadHeight, headMoveTimer / timeToMoveHead), head.localPosition.z);
+                
+                if (head.localPosition.y >= originalHeadPosition.y + maxHeadHeight)
+                {
+                    startHeadHeight = head.localPosition.y;
+                    targetHeadHeight = originalHeadPosition.y;
+
+                    headMoveTimer = 0;
+                }
+                else if (head.localPosition.y <= originalHeadPosition.y)
+                {
+                    startHeadHeight = head.localPosition.y;
+                    targetHeadHeight = originalHeadPosition.y + maxHeadHeight;
+
+                    headMoveTimer = 0;
+                }
+                headMoveTimer += Time.deltaTime;
             }
         }
     }
