@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
     public float rotationSpeed;
     public float maxDistanceToPlanet;
     public float timeToLerpCamera;
+    public float defaultCameraSize;
+    public float interactCameraSize;
     public float maxShakeAmplitude;
     public float maxShakeStopDuration;
 
@@ -17,7 +19,6 @@ public class Player : MonoBehaviour
 
     private Rigidbody _rigidbody;
     private Camera mainCamera;
-    private Transform cameraCloseTargetPosition;
     private Entity currentEntity;
 
     private Vector3 toPlanetVector;
@@ -30,8 +31,6 @@ public class Player : MonoBehaviour
     private bool secondOptionSelected;
     private bool bringCameraCloser;
     private bool resetCamera;
-    private Vector3 startCameraPosition;
-    private Vector3 initialCameraLocalPosition;
     private float shakeStopDuration;
     private float shakeStopDurationTimer;
     private float timerLerpCamera;
@@ -46,7 +45,7 @@ public class Player : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
         _rigidbody.velocity = Vector3.zero;
         mainCamera = GetComponentInChildren<Camera>();
-        cameraCloseTargetPosition = transform.Find("CameraCloseTargetPositon");
+        mainCamera.orthographicSize = defaultCameraSize;
         currentEntity = null;
 
         toPlanetVector = planet.transform.position - _rigidbody.position;
@@ -59,8 +58,6 @@ public class Player : MonoBehaviour
         secondOptionSelected = false;
         bringCameraCloser = false;
         resetCamera = false;
-        startCameraPosition = mainCamera.transform.position;
-        initialCameraLocalPosition = mainCamera.transform.localPosition;
         shakeStopDuration = 0;
         shakeStopDurationTimer = 0;
         timerLerpCamera = 0;
@@ -82,10 +79,8 @@ public class Player : MonoBehaviour
             {
                 if (timerLerpCamera <= timeToLerpCamera)
                 {
-                    mainCamera.transform.position = Vector3.Lerp(startCameraPosition, cameraCloseTargetPosition.position, Mathf.SmoothStep(0, 1, timerLerpCamera / timeToLerpCamera));
+                    mainCamera.orthographicSize = Mathf.SmoothStep(defaultCameraSize, interactCameraSize, timerLerpCamera / timeToLerpCamera);
                     timerLerpCamera += Time.deltaTime;
-
-                    initialCameraLocalPosition = mainCamera.transform.localPosition;
                 }
                 else
                 {
@@ -130,10 +125,8 @@ public class Player : MonoBehaviour
             {
                 if (timerLerpCamera <= timeToLerpCamera)
                 {
-                    mainCamera.transform.position = Vector3.Lerp(cameraCloseTargetPosition.position, startCameraPosition, Mathf.SmoothStep(0, 1, timerLerpCamera / timeToLerpCamera));
+                    mainCamera.orthographicSize = Mathf.SmoothStep(interactCameraSize, defaultCameraSize, timerLerpCamera / timeToLerpCamera);
                     timerLerpCamera += Time.deltaTime;
-
-                    initialCameraLocalPosition = mainCamera.transform.localPosition;
                 }
                 else
                 {
@@ -186,7 +179,7 @@ public class Player : MonoBehaviour
         if (shakeStopDurationTimer > shakeStopDuration)
         {
             Vector3 shake = Random.insideUnitCircle * Mathf.Lerp(0, maxShakeAmplitude, 1f - GameManager.instance.GetAsteroidDistanceToPlanetNormalized());
-            mainCamera.transform.localPosition = initialCameraLocalPosition + shake;
+            mainCamera.transform.localPosition += shake;
 
             shakeStopDuration = Random.Range(0, maxShakeStopDuration);
             shakeStopDurationTimer = 0;
@@ -209,7 +202,6 @@ public class Player : MonoBehaviour
     {
         currentEntity = entity;
         bringCameraCloser = true;
-        startCameraPosition = mainCamera.transform.position;
         timerLerpCamera = 0;
     }
 
