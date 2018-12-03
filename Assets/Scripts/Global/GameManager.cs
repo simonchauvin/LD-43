@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     public Color startLightColor;
     public Color targetAtmosphereColor;
     public Color targetLightColor;
+    public Color fadePanelColor;
 
     [System.Serializable]
     public class WinConditionsSettings
@@ -116,6 +117,7 @@ public class GameManager : MonoBehaviour
 
         Transform introUI = GameObject.Find("MenuCanvas").transform.Find("IntroUI").transform;
         introPanel = introUI.Find("Panel").GetComponent<Image>();
+        introPanel.color = fadePanelColor;
         introPanel.enabled = true;
         titleText = introUI.Find("Title").GetComponent<Text>();
         titleText.enabled = true;
@@ -182,7 +184,7 @@ public class GameManager : MonoBehaviour
     {
         if (ready)
         {
-            if (GetAsteroidDistanceToPlanetNormalized() < 0.1f)
+            if (GetAsteroidDistanceToPlanetNormalized() < 0.05f)
             {
                 Debug.Log("Asteroid arrived");
                 ready = false;
@@ -204,7 +206,7 @@ public class GameManager : MonoBehaviour
                 }
                 if (Input.GetButton("Cancel"))
                 {
-                    introPanel.color = Color.Lerp(new Color(0, 0, 0, 0), new Color(0, 0, 0, 1), quitTimer / timeToQuit);
+                    introPanel.color = Color.Lerp(new Color(fadePanelColor.r, fadePanelColor.g, fadePanelColor.b, 0), fadePanelColor, quitTimer / timeToQuit);
                     fadeQuitColor = introPanel.color;
                     quitTimer += Time.deltaTime;
                     if (quitTimer >= timeToQuit)
@@ -212,13 +214,14 @@ public class GameManager : MonoBehaviour
                         Application.Quit();
                     }
                 }
-                else if (quitTimer > 0)
+                else if (quitTimer >= 0)
                 {
-                    introPanel.color = Color.Lerp(new Color(0, 0, 0, 0), fadeQuitColor, quitTimer / timeToQuit);
+                    introPanel.color = Color.Lerp(new Color(fadePanelColor.r, fadePanelColor.g, fadePanelColor.b, 0), fadeQuitColor, quitTimer / timeToQuit);
                     quitTimer -= Time.deltaTime;
                 }
                 else
                 {
+                    introPanel.color = new Color(fadePanelColor.r, fadePanelColor.g, fadePanelColor.b, 0);
                     introPanel.enabled = false;
                 }
 
@@ -230,7 +233,7 @@ public class GameManager : MonoBehaviour
         {
             if (leaving)
             {
-                introPanel.color = Color.Lerp(new Color(0, 0, 0, 0), new Color(0, 0, 0, 1), leaveTimer / timeToLeave);
+                introPanel.color = Color.Lerp(new Color(fadePanelColor.r, fadePanelColor.g, fadePanelColor.b, 0), fadePanelColor, leaveTimer / timeToLeave);
                 leaveTimer += Time.deltaTime;
                 if (leaveTimer >= timeToLeave)
                 {
@@ -290,10 +293,10 @@ public class GameManager : MonoBehaviour
             {
                 if (introTimer <= introTime)
                 {
-                    introPanel.color = Color.Lerp(Color.black, new Color(0, 0, 0, 0), introTimer / introTime);
+                    introPanel.color = Color.Lerp(fadePanelColor, new Color(fadePanelColor.r, fadePanelColor.g, fadePanelColor.b, 0), introTimer / introTime);
                     introTimer += Time.deltaTime;
 
-                    if (introTimer >= introTime * 0.5f)
+                    if (introTimer >= introTime * 0.8f)
                     {
                         introText.enabled = false;
                     }

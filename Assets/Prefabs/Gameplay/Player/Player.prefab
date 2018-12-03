@@ -58,6 +58,7 @@ GameObject:
   - component: {fileID: 54775896839407274}
   - component: {fileID: 114089516497458482}
   - component: {fileID: 114206522905712404}
+  - component: {fileID: 81831220268211976}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -74,7 +75,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4961911514994014}
   - component: {fileID: 20639600066570446}
-  - component: {fileID: 81323461046663046}
   - component: {fileID: 114408028803426468}
   m_Layer: 0
   m_Name: Main Camera
@@ -89,8 +89,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1641270746471820}
-  m_LocalRotation: {x: -0.10475907, y: -0, z: 0.119044386, w: 0.98734695}
-  m_LocalPosition: {x: -23.390081, y: 94.49594, z: -20.583273}
+  m_LocalRotation: {x: 0.08599762, y: -0, z: -0.14670181, w: 0.9854355}
+  m_LocalPosition: {x: 28.67, y: 93.42, z: 16.81}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4961911514994014}
@@ -98,7 +98,7 @@ Transform:
   - {fileID: 4787283136639716}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -46.954002, y: -84.37, z: 13.236001}
 --- !u!4 &4673606146385894
 Transform:
   m_ObjectHideFlags: 1
@@ -277,12 +277,12 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!81 &81323461046663046
+--- !u!81 &81831220268211976
 AudioListener:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1666801362277880}
+  m_GameObject: {fileID: 1641270746471820}
   m_Enabled: 1
 --- !u!114 &114089516497458482
 MonoBehaviour:
@@ -301,10 +301,12 @@ MonoBehaviour:
   rotationSpeed: 100
   maxDistanceToPlanet: 10
   timeToLerpCamera: 1
+  maxHeadHeight: 0.2
   defaultCameraSize: 40
   interactCameraSize: 35
   maxShakeAmplitude: 2
   maxShakeStopDuration: 0.05
+  timeToMoveHead: 0.4
 --- !u!114 &114206522905712404
 MonoBehaviour:
   m_ObjectHideFlags: 1

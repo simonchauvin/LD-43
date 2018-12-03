@@ -60,6 +60,7 @@ MonoBehaviour:
   startLightColor: {r: 1, g: 0.86543655, b: 0.759434, a: 1}
   targetAtmosphereColor: {r: 1, g: 0.53464276, b: 0.16509432, a: 1}
   targetLightColor: {r: 1, g: 0.53464276, b: 0.16509432, a: 1}
+  fadePanelColor: {r: 0.14150941, g: 0.14150941, b: 0.14150941, a: 1}
   winConditionSettings:
     minEntityKindCountPercentage: 0.25
     minKnowledgeProportion: 0.1
