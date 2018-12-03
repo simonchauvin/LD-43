@@ -53,6 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   introTime: 2
   timeToQuit: 2
+  timeToLeave: 2
   targetAtmosphereColor: {r: 0, g: 0, b: 0, a: 0}
   targetLightColor: {r: 0, g: 0, b: 0, a: 0}
   winConditionSettings:
@@ -61,3 +62,15 @@ MonoBehaviour:
     minPeopleProportion: 0.1
     minNatureProportion: 0.1
     minArtProportion: 0.1
+  winTexts:
+    lost: But it wasn't enough.
+    win: You found a way to make it work.
+    tooFewKnowledge: You wandered aimlessly through the dark empty space until the
+      end.
+    tooFewPeople: You kept going until there was no one else.
+    tooFewNature: You could not remember what it was like.
+    tooFewArt: You lost the will to live through the changes.
+    enoughKnowledge: You reached a place that could be suitable.
+    enoughPeople: You were enough to try.
+    enoughNature: You felt at home.
+    enoughArt: You had hope.

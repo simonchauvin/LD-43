@@ -68,7 +68,7 @@ public class Player : MonoBehaviour
         if (GameManager.instance.IsReady())
         {
             float translation = Input.GetAxis("Vertical"),
-            rotation = Input.GetAxis("Horizontal");
+                rotation = Input.GetAxis("Horizontal");
 
             movingForward = translation > 0;
             movingBackward = translation < 0;
