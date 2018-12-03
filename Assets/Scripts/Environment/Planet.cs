@@ -16,6 +16,8 @@ public class Planet : MonoBehaviour
     {
         _collider = GetComponentInChildren<MeshCollider>();
         dustStorm = GetComponent<ParticleSystem>().emission;
+        GetComponent<ParticleSystem>().Clear();
+        dustStorm.rateOverTime = 0;
 
         radius = _collider.bounds.extents.x;
     }

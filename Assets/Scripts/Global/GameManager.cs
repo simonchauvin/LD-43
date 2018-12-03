@@ -19,9 +19,12 @@ public class GameManager : MonoBehaviour
     }
 
     public Transform startPlayerPosition;
+    public Transform asteroidStartPosition;
     public float introTime;
     public float timeToQuit;
     public float timeToLeave;
+    public Color startAtmosphereColor;
+    public Color startLightColor;
     public Color targetAtmosphereColor;
     public Color targetLightColor;
 
@@ -89,8 +92,6 @@ public class GameManager : MonoBehaviour
     private bool leaving;
     private bool canRestart;
     private bool hasRestarted;
-    private Color startAtmosphereColor;
-    private Color startLightColor;
     private Color fadeQuitColor;
     private Dictionary<EntityKind, int> totalEntityKindCount;
 
@@ -140,8 +141,8 @@ public class GameManager : MonoBehaviour
         takeOrLeaveUI.gameObject.SetActive(false);
 
         planet.Init();
-        asteroid.Init(planet);
-        player.Init(planet, startPlayerPosition.position);
+        asteroid.Init(planet, asteroidStartPosition.position);
+        player.Init(planet, startPlayerPosition);
         for (int i = 0; i < entities.Length; i++)
         {
             entities[i].Init(player);
@@ -156,8 +157,8 @@ public class GameManager : MonoBehaviour
         leaving = false;
         canRestart = false;
         hasRestarted = true;
-        startAtmosphereColor = mainCamera.backgroundColor;
-        startLightColor = sunlight.color;
+        mainCamera.backgroundColor = startAtmosphereColor;
+        sunlight.color = startLightColor;
         totalEntityKindCount = new Dictionary<EntityKind, int>();
         totalEntityKindCount.Add(EntityKind.Neutral, 0);
         totalEntityKindCount.Add(EntityKind.Knowledge, 0);
@@ -179,33 +180,49 @@ public class GameManager : MonoBehaviour
     {
         if (ready)
         {
-            if (Input.GetButtonDown("Cancel"))
+            if (GetAsteroidDistanceToPlanetNormalized() < 0.1f)
             {
-                quitTimer = 0;
+                Debug.Log("Asteroid arrived");
+                ready = false;
+                leaving = true;
+                leaveTimer = 0;
                 introPanel.enabled = true;
-            }
-            if (Input.GetButton("Cancel"))
-            {
-                introPanel.color = Color.Lerp(new Color(0, 0, 0, 0), new Color(0, 0, 0, 1), quitTimer / timeToQuit);
-                fadeQuitColor = introPanel.color;
-                quitTimer += Time.deltaTime;
-                if (quitTimer >= timeToQuit)
-                {
-                    Application.Quit();
-                }
-            }
-            else if (quitTimer > 0)
-            {
-                introPanel.color = Color.Lerp(new Color(0, 0, 0, 0), fadeQuitColor, quitTimer / timeToQuit);
-                quitTimer -= Time.deltaTime;
+                endText1.text = ".";
+                endText2.text = ".";
+                endText3.text = ".";
+                endText4.text = ".";
+                endText5.text = ".";
             }
             else
             {
-                introPanel.enabled = false;
-            }
+                if (Input.GetButtonDown("Cancel"))
+                {
+                    quitTimer = 0;
+                    introPanel.enabled = true;
+                }
+                if (Input.GetButton("Cancel"))
+                {
+                    introPanel.color = Color.Lerp(new Color(0, 0, 0, 0), new Color(0, 0, 0, 1), quitTimer / timeToQuit);
+                    fadeQuitColor = introPanel.color;
+                    quitTimer += Time.deltaTime;
+                    if (quitTimer >= timeToQuit)
+                    {
+                        Application.Quit();
+                    }
+                }
+                else if (quitTimer > 0)
+                {
+                    introPanel.color = Color.Lerp(new Color(0, 0, 0, 0), fadeQuitColor, quitTimer / timeToQuit);
+                    quitTimer -= Time.deltaTime;
+                }
+                else
+                {
+                    introPanel.enabled = false;
+                }
 
-            mainCamera.backgroundColor = Color.Lerp(targetAtmosphereColor, startAtmosphereColor, GetAsteroidDistanceToPlanetNormalized());
-            sunlight.color = Color.Lerp(targetLightColor, startLightColor, GetAsteroidDistanceToPlanetNormalized());
+                mainCamera.backgroundColor = Color.Lerp(targetAtmosphereColor, startAtmosphereColor, GetAsteroidDistanceToPlanetNormalized());
+                sunlight.color = Color.Lerp(targetLightColor, startLightColor, GetAsteroidDistanceToPlanetNormalized());
+            }
         }
         else
         {
@@ -362,10 +379,10 @@ public class GameManager : MonoBehaviour
             peopleProportion = peopleScore / 4f,
             natureProportion = natureScore / 4f,
             artProportion = artScore / 4f;
-        Debug.Log("Knowledge score: " + knowledgeScore);
-        Debug.Log("People score: " + peopleScore);
-        Debug.Log("Nature score: " + natureScore);
-        Debug.Log("Art score: " + artScore);
+        Debug.Log("Knowledge score: " + knowledgeScore + " / " + knowLedgeProportion);
+        Debug.Log("People score: " + peopleScore + " / " + peopleProportion);
+        Debug.Log("Nature score: " + natureScore + " / " + natureProportion);
+        Debug.Log("Art score: " + artScore + " / " + artProportion);
         Debug.Log("Total score: " + totalScore);
 
         List<WinType> winTypes = new List<WinType>();

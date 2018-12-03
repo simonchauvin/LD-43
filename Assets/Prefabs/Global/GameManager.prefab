@@ -52,9 +52,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startPlayerPosition: {fileID: 0}
+  asteroidStartPosition: {fileID: 0}
   introTime: 5
   timeToQuit: 2
   timeToLeave: 2
+  startAtmosphereColor: {r: 1, g: 0.86543655, b: 0.759434, a: 1}
+  startLightColor: {r: 1, g: 0.86543655, b: 0.759434, a: 1}
   targetAtmosphereColor: {r: 1, g: 0.53464276, b: 0.16509432, a: 1}
   targetLightColor: {r: 1, g: 0.53464276, b: 0.16509432, a: 1}
   winConditionSettings:

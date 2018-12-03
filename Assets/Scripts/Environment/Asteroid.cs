@@ -14,8 +14,10 @@ public class Asteroid : MonoBehaviour
     private float planetRadius;
 
 
-    public void Init(Planet planet)
+    public void Init(Planet planet, Vector3 startPosition)
     {
+        transform.position = startPosition;
+        transform.localScale = Vector3.one;
         planetPosition = planet.transform.position;
         direction = (planetPosition - transform.position).normalized;
         speed = 0;
@@ -33,11 +35,6 @@ public class Asteroid : MonoBehaviour
             transform.localScale = Vector3.one * Mathf.Lerp(1, maxScale, 1f - GetDistanceToPlanetNormalized());
         }
 	}
-
-    private void OnTriggerEnter(Collider other)
-    {
-        GameManager.instance.GameOver();
-    }
 
     public float GetDistanceToPlanetNormalized()
     {

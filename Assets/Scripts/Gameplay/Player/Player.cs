@@ -37,12 +37,14 @@ public class Player : MonoBehaviour
     private float timerLerpCamera;
 
 
-    public void Init(Planet planet, Vector3 position)
+    public void Init(Planet planet, Transform start)
     {
         this.planet = planet;
-        transform.position = position;
+        transform.position = start.position;
+        transform.rotation = start.rotation;
 
         _rigidbody = GetComponent<Rigidbody>();
+        _rigidbody.velocity = Vector3.zero;
         mainCamera = GetComponentInChildren<Camera>();
         cameraCloseTargetPosition = transform.Find("CameraCloseTargetPositon");
         currentEntity = null;
