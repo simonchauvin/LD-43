@@ -92,6 +92,10 @@ public class GameManager : MonoBehaviour
 
     void Start ()
     {
+#if !UNITY_EDITOR
+        Cursor.visible = false;
+#endif
+
         player = FindObjectOfType<Player>();
         entities = FindObjectsOfType<Entity>();
         planet = FindObjectOfType<Planet>();
