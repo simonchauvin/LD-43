@@ -92,6 +92,7 @@ public class GameManager : MonoBehaviour
     private bool leaving;
     private bool canRestart;
     private bool hasRestarted;
+    private bool showingEndScreen;
     private Color fadeQuitColor;
     private Dictionary<EntityKind, int> totalEntityKindCount;
 
@@ -157,6 +158,7 @@ public class GameManager : MonoBehaviour
         leaving = false;
         canRestart = false;
         hasRestarted = true;
+        showingEndScreen = false;
         mainCamera.backgroundColor = startAtmosphereColor;
         sunlight.color = startLightColor;
         totalEntityKindCount = new Dictionary<EntityKind, int>();
@@ -233,8 +235,39 @@ public class GameManager : MonoBehaviour
                 if (leaveTimer >= timeToLeave)
                 {
                     leaving = false;
-                    StartCoroutine(ShowEndScreen());
+                    showingEndScreen = true;
                 }
+            }
+            else if (showingEndScreen)
+            {
+                if (Input.anyKeyDown)
+                {
+                    if (!endText1.enabled)
+                    {
+                        endText1.enabled = true;
+                    }
+                    else if (!endText2.enabled)
+                    {
+                        endText2.enabled = true;
+                    }
+                    else if (!endText3.enabled)
+                    {
+                        endText3.enabled = true;
+                    }
+                    else if (!endText4.enabled)
+                    {
+                        endText4.enabled = true;
+                    }
+                    else if (!endText5.enabled)
+                    {
+                        endText5.enabled = true;
+
+                        canRestart = true;
+                        showingEndScreen = false;
+                        Debug.Log("End");
+                    }
+                }
+
             }
             else if (canRestart)
             {
@@ -273,33 +306,6 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
-    }
-
-    private IEnumerator ShowEndScreen()
-    {
-        yield return new WaitForSeconds(Random.Range(1, 2));
-
-        endText1.enabled = true;
-
-        yield return new WaitForSeconds(Random.Range(1, 2));
-
-        endText2.enabled = true;
-
-        yield return new WaitForSeconds(Random.Range(1, 2));
-
-        endText3.enabled = true;
-
-        yield return new WaitForSeconds(Random.Range(1, 2));
-
-        endText4.enabled = true;
-
-        yield return new WaitForSeconds(Random.Range(1, 2));
-
-        endText5.enabled = true;
-
-        canRestart = true;
-
-        Debug.Log("End");
     }
 
     public void LoadEntity(Entity entity)
