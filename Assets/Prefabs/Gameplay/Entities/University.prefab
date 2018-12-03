@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 114401434274341734}
   - component: {fileID: 114943981712943840}
   m_Layer: 0
-  m_Name: Library
+  m_Name: University
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -123,9 +123,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kind: 1
-  description: The library
-  firstOption: Take
-  secondOption: Leave
+  description: A University
+  firstOption: Send everyone to the shuttle
+  secondOption: Leave them be
 --- !u!114 &114943981712943840
 MonoBehaviour:
   m_ObjectHideFlags: 1
