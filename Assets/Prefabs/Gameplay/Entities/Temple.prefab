@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 114401434274341734}
   - component: {fileID: 114943981712943840}
   m_Layer: 0
-  m_Name: University
+  m_Name: Temple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38,8 +38,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1107157182430116}
-  m_LocalRotation: {x: 0.069021955, y: -0, z: 0.13956642, w: 0.98780423}
-  m_LocalPosition: {x: -27.159266, y: 93.72417, z: 13.431494}
+  m_LocalRotation: {x: -0.11410995, y: -0, z: -0.10138056, w: 0.9882818}
+  m_LocalPosition: {x: 19.838127, y: 94.38678, z: -22.329012}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -60,7 +60,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 0b6237e81c13c724aaf4a058c4baad59, type: 2}
+  - {fileID: 2100000, guid: 9e0857230a8b52740adb47c00c8235f7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -86,7 +86,7 @@ MeshFilter:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1107157182430116}
-  m_Mesh: {fileID: 4300002, guid: 7da31ce842b2fad4a933decfb3cc7a3a, type: 3}
+  m_Mesh: {fileID: 4300002, guid: 5e8da287199a6454c8ce4f6058fb74ff, type: 3}
 --- !u!65 &65335088321744194
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -97,8 +97,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 18, y: 11.000001, z: 18}
-  m_Center: {x: 0.0000023194589, y: 5.500008, z: -0.000001989305}
+  m_Size: {x: 5, y: 15.5, z: 5}
+  m_Center: {x: 0.0000005328329, y: 7.75, z: -0.0000005066395}
 --- !u!65 &65727409839980050
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -109,8 +109,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 14, y: 11.000001, z: 14.000002}
-  m_Center: {x: 0.0000023194589, y: 5.500008, z: -0.000001989305}
+  m_Size: {x: 2.5, y: 15.5, z: 2.5000007}
+  m_Center: {x: 0.0000005328329, y: 7.75, z: -0.0000005066395}
 --- !u!114 &114401434274341734
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -122,8 +122,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29d800b5a047b6b4c81b1c20ecfeed83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kind: 1
-  description: A University
+  kind: 3
+  description: A temple
   firstOption: Send everyone to the shuttle
   secondOption: Leave them be
 --- !u!114 &114943981712943840
@@ -137,4 +137,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4d25d9683aca75419499db5fdb06610, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  margin: 1.5
+  margin: 1

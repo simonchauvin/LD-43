@@ -9,48 +9,48 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1994384818564988}
+  m_RootGameObject: {fileID: 1572140001837470}
   m_IsPrefabAsset: 1
---- !u!1 &1994384818564988
+--- !u!1 &1572140001837470
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4884181724438306}
-  - component: {fileID: 33752924840510024}
-  - component: {fileID: 23312448949474862}
-  - component: {fileID: 65980554075949378}
-  - component: {fileID: 65415541111413978}
-  - component: {fileID: 114142404359719942}
-  - component: {fileID: 114641706701976202}
+  - component: {fileID: 4416049710191106}
+  - component: {fileID: 33560482286820062}
+  - component: {fileID: 23142020317474912}
+  - component: {fileID: 65798923759991240}
+  - component: {fileID: 65722000047300242}
+  - component: {fileID: 114564587862962900}
+  - component: {fileID: 114699881281207436}
   m_Layer: 0
-  m_Name: Building2
+  m_Name: Offices2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
---- !u!4 &4884181724438306
+--- !u!4 &4416049710191106
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1994384818564988}
-  m_LocalRotation: {x: -0.20811364, y: -0, z: 0.21620516, w: 0.9539099}
-  m_LocalPosition: {x: -31.755024, y: -18.08928, z: -4.34708}
-  m_LocalScale: {x: 0.5, y: 0.75, z: 1.25}
+  m_GameObject: {fileID: 1572140001837470}
+  m_LocalRotation: {x: -0.06255599, y: -0, z: 0.2582832, w: 0.96404177}
+  m_LocalPosition: {x: -48.803177, y: 84.1578, z: -11.820092}
+  m_LocalScale: {x: 2, y: 1.25, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &23312448949474862
+--- !u!23 &23142020317474912
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1994384818564988}
+  m_GameObject: {fileID: 1572140001837470}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -60,7 +60,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 3ed08f8120572b14092b2b2eefc9b139, type: 2}
+  - {fileID: 2100000, guid: 90bcf75e285cb774aa37038bf6711516, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -80,58 +80,58 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33752924840510024
+--- !u!33 &33560482286820062
 MeshFilter:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1994384818564988}
+  m_GameObject: {fileID: 1572140001837470}
   m_Mesh: {fileID: 4300000, guid: 18f5c11684b202346afa4a990ddaac1e, type: 3}
---- !u!65 &65415541111413978
+--- !u!65 &65722000047300242
 BoxCollider:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1994384818564988}
+  m_GameObject: {fileID: 1572140001837470}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 20, z: 10}
+  m_Size: {x: 8, y: 20, z: 8}
   m_Center: {x: 0, y: 10, z: 0}
---- !u!65 &65980554075949378
+--- !u!65 &65798923759991240
 BoxCollider:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1994384818564988}
+  m_GameObject: {fileID: 1572140001837470}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 4, y: 20, z: 4}
   m_Center: {x: 0, y: 10, z: 0}
---- !u!114 &114142404359719942
+--- !u!114 &114564587862962900
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1994384818564988}
+  m_GameObject: {fileID: 1572140001837470}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 29d800b5a047b6b4c81b1c20ecfeed83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kind: 2
-  description: Housing
+  kind: 1
+  description: Offices
   firstOption: Send everyone to the shuttle
   secondOption: Leave them be
---- !u!114 &114641706701976202
+--- !u!114 &114699881281207436
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1994384818564988}
+  m_GameObject: {fileID: 1572140001837470}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c4d25d9683aca75419499db5fdb06610, type: 3}
