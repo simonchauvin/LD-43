@@ -1101,19 +1101,19 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4193900588109366, guid: 84738dbfc576680429b32b77ab31085b, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 96.02611
+      value: 68.816505
       objectReference: {fileID: 0}
     - target: {fileID: 4193900588109366, guid: 84738dbfc576680429b32b77ab31085b, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -7.7026286
+      value: -32.528023
       objectReference: {fileID: 0}
     - target: {fileID: 4193900588109366, guid: 84738dbfc576680429b32b77ab31085b, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 20.540344
+      value: -62.517735
       objectReference: {fileID: 0}
     - target: {fileID: 4193900588109366, guid: 84738dbfc576680429b32b77ab31085b, type: 2}
       propertyPath: m_LocalRotation.x
-      value: 0.15358117
+      value: -0.54839104
       objectReference: {fileID: 0}
     - target: {fileID: 4193900588109366, guid: 84738dbfc576680429b32b77ab31085b, type: 2}
       propertyPath: m_LocalRotation.y
@@ -1121,11 +1121,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4193900588109366, guid: 84738dbfc576680429b32b77ab31085b, type: 2}
       propertyPath: m_LocalRotation.z
-      value: -0.71799195
+      value: -0.60364246
       objectReference: {fileID: 0}
     - target: {fileID: 4193900588109366, guid: 84738dbfc576680429b32b77ab31085b, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 0.6788964
+      value: 0.5786909
       objectReference: {fileID: 0}
     - target: {fileID: 4193900588109366, guid: 84738dbfc576680429b32b77ab31085b, type: 2}
       propertyPath: m_RootOrder
@@ -1266,17 +1266,6 @@ Prefab:
     - target: {fileID: 4866237661550722, guid: 8cecbc98bc0c9ce479bbe9377e1b6640, type: 2}
       propertyPath: m_RootOrder
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 82031580475937060, guid: 8cecbc98bc0c9ce479bbe9377e1b6640,
-        type: 2}
-      propertyPath: OutputAudioMixerGroup
-      value: 
-      objectReference: {fileID: 24300002, guid: b0bdc735998446e4caf29cee1520aa3a,
-        type: 2}
-    - target: {fileID: 82031580475937060, guid: 8cecbc98bc0c9ce479bbe9377e1b6640,
-        type: 2}
-      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8cecbc98bc0c9ce479bbe9377e1b6640, type: 2}
