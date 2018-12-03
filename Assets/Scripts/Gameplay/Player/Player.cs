@@ -37,9 +37,10 @@ public class Player : MonoBehaviour
     private float timerLerpCamera;
 
 
-    public void Init(Planet planet)
+    public void Init(Planet planet, Vector3 position)
     {
         this.planet = planet;
+        transform.position = position;
 
         _rigidbody = GetComponent<Rigidbody>();
         mainCamera = GetComponentInChildren<Camera>();

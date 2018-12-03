@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public Transform startPlayerPosition;
     public float introTime;
     public float timeToQuit;
     public float timeToLeave;
@@ -86,6 +87,8 @@ public class GameManager : MonoBehaviour
     private bool ready;
     private bool pressedStart;
     private bool leaving;
+    private bool canRestart;
+    private bool hasRestarted;
     private Color startAtmosphereColor;
     private Color startLightColor;
     private Color fadeQuitColor;
@@ -97,7 +100,11 @@ public class GameManager : MonoBehaviour
 #if !UNITY_EDITOR
         Cursor.visible = false;
 #endif
+        Init();
+    }
 
+    private void Init()
+    {
         player = FindObjectOfType<Player>();
         entities = FindObjectsOfType<Entity>();
         planet = FindObjectOfType<Planet>();
@@ -134,12 +141,12 @@ public class GameManager : MonoBehaviour
 
         planet.Init();
         asteroid.Init(planet);
-        player.Init(planet);
+        player.Init(planet, startPlayerPosition.position);
         for (int i = 0; i < entities.Length; i++)
         {
             entities[i].Init(player);
         }
-        
+
         mainCamera = player.GetCamera();
         introTimer = 0;
         quitTimer = 0;
@@ -147,6 +154,8 @@ public class GameManager : MonoBehaviour
         ready = false;
         pressedStart = false;
         leaving = false;
+        canRestart = false;
+        hasRestarted = true;
         startAtmosphereColor = mainCamera.backgroundColor;
         startLightColor = sunlight.color;
         totalEntityKindCount = new Dictionary<EntityKind, int>();
@@ -165,46 +174,34 @@ public class GameManager : MonoBehaviour
         Debug.Log("Total nature entities: " + totalEntityKindCount[EntityKind.Nature]);
         Debug.Log("Total art entities: " + totalEntityKindCount[EntityKind.Art]);
     }
-	
-	void Update ()
+
+    void Update ()
     {
         if (ready)
         {
-            if (leaving)
+            if (Input.GetButtonDown("Cancel"))
             {
-                introPanel.color = Color.Lerp(new Color(0, 0, 0, 0), new Color(0, 0, 0, 1), leaveTimer / timeToLeave);
-                leaveTimer += Time.deltaTime;
-                if (leaveTimer >= timeToLeave)
+                quitTimer = 0;
+                introPanel.enabled = true;
+            }
+            if (Input.GetButton("Cancel"))
+            {
+                introPanel.color = Color.Lerp(new Color(0, 0, 0, 0), new Color(0, 0, 0, 1), quitTimer / timeToQuit);
+                fadeQuitColor = introPanel.color;
+                quitTimer += Time.deltaTime;
+                if (quitTimer >= timeToQuit)
                 {
-                    StartCoroutine(ShowEndScreen());
+                    Application.Quit();
                 }
+            }
+            else if (quitTimer > 0)
+            {
+                introPanel.color = Color.Lerp(new Color(0, 0, 0, 0), fadeQuitColor, quitTimer / timeToQuit);
+                quitTimer -= Time.deltaTime;
             }
             else
             {
-                if (Input.GetButtonDown("Cancel"))
-                {
-                    quitTimer = 0;
-                    introPanel.enabled = true;
-                }
-                if (Input.GetButton("Cancel"))
-                {
-                    introPanel.color = Color.Lerp(new Color(0, 0, 0, 0), new Color(0, 0, 0, 1), quitTimer / timeToQuit);
-                    fadeQuitColor = introPanel.color;
-                    quitTimer += Time.deltaTime;
-                    if (quitTimer >= timeToQuit)
-                    {
-                        Application.Quit();
-                    }
-                }
-                else if (quitTimer > 0)
-                {
-                    introPanel.color = Color.Lerp(new Color(0, 0, 0, 0), fadeQuitColor, quitTimer / timeToQuit);
-                    quitTimer -= Time.deltaTime;
-                }
-                else
-                {
-                    introPanel.enabled = false;
-                }
+                introPanel.enabled = false;
             }
 
             mainCamera.backgroundColor = Color.Lerp(targetAtmosphereColor, startAtmosphereColor, GetAsteroidDistanceToPlanetNormalized());
@@ -212,9 +209,27 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            if (Input.anyKeyDown)
+            if (leaving)
+            {
+                introPanel.color = Color.Lerp(new Color(0, 0, 0, 0), new Color(0, 0, 0, 1), leaveTimer / timeToLeave);
+                leaveTimer += Time.deltaTime;
+                if (leaveTimer >= timeToLeave)
+                {
+                    leaving = false;
+                    StartCoroutine(ShowEndScreen());
+                }
+            }
+            else if (canRestart)
+            {
+                if (Input.anyKeyDown)
+                {
+                    Init();
+                }
+            }
+            else if (hasRestarted && Input.anyKeyDown)
             {
                 pressedStart = true;
+                hasRestarted = false;
                 titleText.enabled = false;
                 creditsText.enabled = false;
 
@@ -237,6 +252,7 @@ public class GameManager : MonoBehaviour
                 {
                     introPanel.enabled = false;
                     ready = true;
+                    pressedStart = false;
                 }
             }
         }
@@ -263,6 +279,10 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(Random.Range(1, 2));
 
         endText5.enabled = true;
+
+        canRestart = true;
+
+        Debug.Log("End");
     }
 
     public void LoadEntity(Entity entity)
@@ -306,6 +326,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Leave planet now");
 
+        ready = false;
         leaving = true;
         leaveTimer = 0;
         introPanel.enabled = true;

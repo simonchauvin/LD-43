@@ -51,6 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47ec177624ec491439bcc9040ad0a9c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startPlayerPosition: {fileID: 0}
   introTime: 5
   timeToQuit: 2
   timeToLeave: 2
