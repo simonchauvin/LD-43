@@ -65,6 +65,7 @@ public class GameManager : MonoBehaviour
     private List<Entity> loadedEntities;
 
     private Image introPanel;
+    private Text titleText;
     private Text introText;
     private Text creditsText;
     private Text endText1;
@@ -83,6 +84,7 @@ public class GameManager : MonoBehaviour
     private float quitTimer;
     private float leaveTimer;
     private bool ready;
+    private bool pressedStart;
     private bool leaving;
     private Color startAtmosphereColor;
     private Color startLightColor;
@@ -106,8 +108,10 @@ public class GameManager : MonoBehaviour
         Transform introUI = GameObject.Find("MenuCanvas").transform.Find("IntroUI").transform;
         introPanel = introUI.Find("Panel").GetComponent<Image>();
         introPanel.enabled = true;
+        titleText = introUI.Find("Title").GetComponent<Text>();
+        titleText.enabled = true;
         introText = introUI.Find("Intro").GetComponent<Text>();
-        introText.enabled = true;
+        introText.enabled = false;
         creditsText = introUI.Find("Credits").GetComponent<Text>();
         creditsText.enabled = true;
         endText1 = introUI.Find("EndText1").GetComponent<Text>();
@@ -141,6 +145,7 @@ public class GameManager : MonoBehaviour
         quitTimer = 0;
         leaveTimer = 0;
         ready = false;
+        pressedStart = false;
         leaving = false;
         startAtmosphereColor = mainCamera.backgroundColor;
         startLightColor = sunlight.color;
@@ -207,21 +212,32 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            if (introTimer <= introTime)
+            if (Input.anyKeyDown)
             {
-                introPanel.color = Color.Lerp(Color.black, new Color(0, 0, 0, 0), introTimer / introTime);
-                introTimer += Time.deltaTime;
+                pressedStart = true;
+                titleText.enabled = false;
+                creditsText.enabled = false;
 
-                if (introTimer >= introTime * 0.5f)
-                {
-                    introText.enabled = false;
-                    creditsText.enabled = false;
-                }
+                introText.enabled = true;
             }
-            else
+
+            if (pressedStart)
             {
-                introPanel.enabled = false;
-                ready = true;
+                if (introTimer <= introTime)
+                {
+                    introPanel.color = Color.Lerp(Color.black, new Color(0, 0, 0, 0), introTimer / introTime);
+                    introTimer += Time.deltaTime;
+
+                    if (introTimer >= introTime * 0.5f)
+                    {
+                        introText.enabled = false;
+                    }
+                }
+                else
+                {
+                    introPanel.enabled = false;
+                    ready = true;
+                }
             }
         }
     }
