@@ -11,8 +11,8 @@ public class Planet : MonoBehaviour
 
     private float radius;
 
-    
-	public void Init()
+
+    public void Init()
     {
         _collider = GetComponentInChildren<MeshCollider>();
         dustStorm = GetComponent<ParticleSystem>().emission;

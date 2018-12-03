@@ -11,14 +11,16 @@ public class Asteroid : MonoBehaviour
     private Vector3 planetPosition;
     private float speed;
     private float startDistance;
+    private float planetRadius;
 
 
-    public void Init(Vector3 planetPosition)
+    public void Init(Planet planet)
     {
-        this.planetPosition = planetPosition;
+        planetPosition = planet.transform.position;
         direction = (planetPosition - transform.position).normalized;
         speed = 0;
-        startDistance = (planetPosition - transform.position).magnitude;
+        planetRadius = planet.GetRadius();
+        startDistance = (planetPosition - transform.position).magnitude - planetRadius;
     }
 
     void Update ()
@@ -39,6 +41,6 @@ public class Asteroid : MonoBehaviour
 
     public float GetDistanceToPlanetNormalized()
     {
-        return (planetPosition - transform.position).magnitude / startDistance;
+        return ((planetPosition - transform.position).magnitude - planetRadius) / startDistance;
     }
 }

@@ -84,7 +84,6 @@ public class GameManager : MonoBehaviour
     private float leaveTimer;
     private bool ready;
     private bool leaving;
-    private float startAsteroidDistance;
     private Color startAtmosphereColor;
     private Color startLightColor;
     private Color fadeQuitColor;
@@ -126,7 +125,7 @@ public class GameManager : MonoBehaviour
         takeOrLeaveUI.gameObject.SetActive(false);
 
         planet.Init();
-        asteroid.Init(planet.transform.position);
+        asteroid.Init(planet);
         player.Init(planet);
         for (int i = 0; i < entities.Length; i++)
         {
@@ -141,7 +140,6 @@ public class GameManager : MonoBehaviour
         leaving = false;
         startAtmosphereColor = mainCamera.backgroundColor;
         startLightColor = sunlight.color;
-        startAsteroidDistance = (asteroid.transform.position - planet.transform.position).sqrMagnitude;
         totalEntityKindCount = new Dictionary<EntityKind, int>();
         totalEntityKindCount.Add(EntityKind.Neutral, 0);
         totalEntityKindCount.Add(EntityKind.Knowledge, 0);
@@ -200,8 +198,8 @@ public class GameManager : MonoBehaviour
                 }
             }
 
-            mainCamera.backgroundColor = Color.Lerp(targetAtmosphereColor, startAtmosphereColor, (asteroid.transform.position - planet.transform.position).sqrMagnitude / startAsteroidDistance);
-            sunlight.color = Color.Lerp(targetLightColor, startLightColor, (asteroid.transform.position - planet.transform.position).sqrMagnitude / startAsteroidDistance);
+            mainCamera.backgroundColor = Color.Lerp(targetAtmosphereColor, startAtmosphereColor, GetAsteroidDistanceToPlanetNormalized());
+            sunlight.color = Color.Lerp(targetLightColor, startLightColor, GetAsteroidDistanceToPlanetNormalized());
         }
         else
         {

@@ -54,8 +54,8 @@ MonoBehaviour:
   introTime: 2
   timeToQuit: 2
   timeToLeave: 2
-  targetAtmosphereColor: {r: 0, g: 0, b: 0, a: 0}
-  targetLightColor: {r: 0, g: 0, b: 0, a: 0}
+  targetAtmosphereColor: {r: 1, g: 0.53464276, b: 0.16509432, a: 1}
+  targetLightColor: {r: 1, g: 0.53464276, b: 0.16509432, a: 1}
   winConditionSettings:
     minEntityKindCountPercentage: 0.25
     minKnowledgeProportion: 0.1
