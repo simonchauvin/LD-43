@@ -32,23 +32,16 @@ public class GameManager : MonoBehaviour
     [System.Serializable]
     public class WinConditionsSettings
     {
-        [Range(0, 1)]
-        public float minEntityKindCountPercentage;
-        [Range(0, 1)]
-        public float minKnowledgeProportion;
-        [Range(0, 1)]
-        public float minPeopleProportion;
-        [Range(0, 1)]
-        public float minNatureProportion;
-        [Range(0, 1)]
-        public float minArtProportion;
+        public int minKnowledgeCount;
+        public int minPeopleCount;
+        public int minNatureCount;
+        public int minArtCount;
     }
     public WinConditionsSettings winConditionSettings;
 
     [System.Serializable]
     public class WinTexts
     {
-        public string lost;
         public string win;
         public string tooFewKnowledge;
         public string tooFewPeople;
@@ -77,7 +70,6 @@ public class GameManager : MonoBehaviour
     private Text endText2;
     private Text endText3;
     private Text endText4;
-    private Text endText5;
     private GameObject takeOrLeaveUI;
     private Text firstOptionText;
     private Text secondOptionText;
@@ -133,8 +125,6 @@ public class GameManager : MonoBehaviour
         endText3.enabled = false;
         endText4 = introUI.Find("EndText4").GetComponent<Text>();
         endText4.enabled = false;
-        endText5 = introUI.Find("EndText5").GetComponent<Text>();
-        endText5.enabled = false;
         takeOrLeaveUI = GameObject.Find("InGameCanvas").transform.Find("TakeOrLeaveUI").gameObject;
         firstOptionText = takeOrLeaveUI.transform.Find("FirstOptionText").GetComponent<Text>();
         secondOptionText = takeOrLeaveUI.transform.Find("SecondOptionText").GetComponent<Text>();
@@ -195,7 +185,6 @@ public class GameManager : MonoBehaviour
                 endText2.text = ".";
                 endText3.text = ".";
                 endText4.text = ".";
-                endText5.text = ".";
             }
             else
             {
@@ -260,10 +249,6 @@ public class GameManager : MonoBehaviour
                     else if (!endText4.enabled)
                     {
                         endText4.enabled = true;
-                    }
-                    else if (!endText5.enabled)
-                    {
-                        endText5.enabled = true;
 
                         canRestart = true;
                         showingEndScreen = false;
@@ -379,15 +364,15 @@ public class GameManager : MonoBehaviour
                     break;
             }
         }
-        knowledgeScore = knowledgeScore / totalEntityKindCount[EntityKind.Knowledge];
-        peopleScore = peopleScore / totalEntityKindCount[EntityKind.People];
-        natureScore = natureScore / totalEntityKindCount[EntityKind.Nature];
-        artScore = artScore / totalEntityKindCount[EntityKind.Art];
+        //knowledgeScore = knowledgeScore / totalEntityKindCount[EntityKind.Knowledge];
+        //peopleScore = peopleScore / totalEntityKindCount[EntityKind.People];
+        //natureScore = natureScore / totalEntityKindCount[EntityKind.Nature];
+        //artScore = artScore / totalEntityKindCount[EntityKind.Art];
         float totalScore = knowledgeScore + peopleScore + natureScore + artScore,
-            knowLedgeProportion = knowledgeScore / 4f,
-            peopleProportion = peopleScore / 4f,
-            natureProportion = natureScore / 4f,
-            artProportion = artScore / 4f;
+            knowLedgeProportion = knowledgeScore / winConditionSettings.minKnowledgeCount,
+            peopleProportion = peopleScore / winConditionSettings.minPeopleCount,
+            natureProportion = natureScore / winConditionSettings.minNatureCount,
+            artProportion = artScore / winConditionSettings.minArtCount;
         Debug.Log("Knowledge score: " + knowledgeScore + " / " + knowLedgeProportion);
         Debug.Log("People score: " + peopleScore + " / " + peopleProportion);
         Debug.Log("Nature score: " + natureScore + " / " + natureProportion);
@@ -395,7 +380,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Total score: " + totalScore);
 
         List<WinType> winTypes = new List<WinType>();
-        if (knowledgeScore < winConditionSettings.minEntityKindCountPercentage || knowLedgeProportion < winConditionSettings.minKnowledgeProportion)
+        if (knowledgeScore < winConditionSettings.minKnowledgeCount)// || knowLedgeProportion < winConditionSettings.minKnowledgeProportion) too hard to understand
         {
             winTypes.Add(WinType.TooFewKnowledge);
         }
@@ -404,7 +389,7 @@ public class GameManager : MonoBehaviour
             winTypes.Add(WinType.EnoughKnowledge);
         }
 
-        if (peopleScore < winConditionSettings.minEntityKindCountPercentage || peopleProportion < winConditionSettings.minPeopleProportion)
+        if (peopleScore < winConditionSettings.minPeopleCount)// || peopleProportion < winConditionSettings.minPeopleProportion) too hard to understand
         {
             winTypes.Add(WinType.TooFewPeople);
         }
@@ -413,7 +398,7 @@ public class GameManager : MonoBehaviour
             winTypes.Add(WinType.EnoughPeople);
         }
 
-        if (natureScore < winConditionSettings.minEntityKindCountPercentage || natureProportion < winConditionSettings.minNatureProportion)
+        if (natureScore < winConditionSettings.minNatureCount)// || natureProportion < winConditionSettings.minNatureProportion) too hard to understand
         {
             winTypes.Add(WinType.TooFewNature);
         }
@@ -422,7 +407,7 @@ public class GameManager : MonoBehaviour
             winTypes.Add(WinType.EnoughNature);
         }
 
-        if (artScore < winConditionSettings.minEntityKindCountPercentage || artProportion < winConditionSettings.minArtProportion)
+        if (artScore < winConditionSettings.minArtCount)// || artProportion < winConditionSettings.minArtProportion) too hard to understand
         {
             winTypes.Add(WinType.TooFewArt);
         }
@@ -430,15 +415,33 @@ public class GameManager : MonoBehaviour
         {
             winTypes.Add(WinType.EnoughArt);
         }
-
+        Debug.Log(winTypes);
         // Lost
-        string[] texts = new string[5];
+        string[] texts = new string[4];
         if (winTypes.Contains(WinType.TooFewKnowledge) || winTypes.Contains(WinType.TooFewPeople) || winTypes.Contains(WinType.TooFewNature) || winTypes.Contains(WinType.TooFewArt))
         {
-            texts = new string[winTypes.Count + 1];
+            Debug.Log("Lost");
+
+            List<WinType> reorderedWinTypes = new List<WinType>();
+            List<WinType> onlyWinTypes = new List<WinType>();
+            List<WinType> onlyLostTypes = new List<WinType>();
             for (int i = 0; i < winTypes.Count; i++)
             {
-                switch (winTypes[i])
+                if (winTypes[i] == WinType.TooFewKnowledge || winTypes[i] == WinType.TooFewPeople || winTypes[i] == WinType.TooFewNature || winTypes[i] == WinType.TooFewArt)
+                {
+                    onlyLostTypes.Add(winTypes[i]);
+                }
+                else
+                {
+                    onlyWinTypes.Add(winTypes[i]);
+                }
+            }
+            reorderedWinTypes.AddRange(onlyWinTypes);
+            reorderedWinTypes.AddRange(onlyLostTypes);
+
+            for (int i = 0; i < reorderedWinTypes.Count; i++)
+            {
+                switch (reorderedWinTypes[i])
                 {
                     case WinType.TooFewKnowledge:
                         texts[i] = winTexts.tooFewKnowledge;
@@ -466,10 +469,11 @@ public class GameManager : MonoBehaviour
                         break;
                 }
             }
-            texts[4] = winTexts.lost;
         }
         else // Win
         {
+            Debug.Log("Win");
+
             texts[0] = winTexts.win;
 
             if (knowLedgeProportion > peopleProportion && knowLedgeProportion > natureProportion && knowLedgeProportion > artProportion) // First Knowledge
@@ -638,7 +642,6 @@ public class GameManager : MonoBehaviour
         endText2.text += texts[1] + "\n";
         endText3.text += texts[2] + "\n";
         endText4.text += texts[3] + "\n";
-        endText5.text += texts[4] + "\n";
     }
 
     public float GetAsteroidDistanceToPlanetNormalized()
