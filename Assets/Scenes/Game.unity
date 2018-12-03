@@ -1273,6 +1273,11 @@ Prefab:
       value: 
       objectReference: {fileID: 24300002, guid: b0bdc735998446e4caf29cee1520aa3a,
         type: 2}
+    - target: {fileID: 82031580475937060, guid: 8cecbc98bc0c9ce479bbe9377e1b6640,
+        type: 2}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8cecbc98bc0c9ce479bbe9377e1b6640, type: 2}
   m_IsPrefabAsset: 0

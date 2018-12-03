@@ -15,7 +15,6 @@ public class Asteroid : MonoBehaviour
     private float speed;
     private float startDistance;
     private float planetRadius;
-    private float audioSourceStartDistance;
 
 
     public void Init(Planet planet, Vector3 startPosition)
@@ -30,8 +29,7 @@ public class Asteroid : MonoBehaviour
         startDistance = (planetPosition - transform.position).magnitude - planetRadius - _collider.bounds.extents.x;
 
         audioSource = GetComponent<AudioSource>();
-        audioSourceStartDistance = audioSource.maxDistance;
-        audioSource.maxDistance = audioSourceStartDistance + _collider.bounds.extents.x;
+        audioSource.outputAudioMixerGroup.audioMixer.SetFloat("Volume", 20f * (1f - GetDistanceToPlanetNormalized()));
     }
 
     void Update ()
@@ -43,14 +41,9 @@ public class Asteroid : MonoBehaviour
 
             transform.localScale = Vector3.one * Mathf.Lerp(1, maxScale, 1f - GetDistanceToPlanetNormalized());
 
-            audioSource.maxDistance = audioSourceStartDistance + _collider.bounds.extents.x;
+            audioSource.outputAudioMixerGroup.audioMixer.SetFloat("Volume", 20f * (1f - GetDistanceToPlanetNormalized()));
         }
 	}
-
-    private void OnAudioFilterRead(float[] data, int channels)
-    {
-        
-    }
 
     public float GetDistanceToPlanetNormalized()
     {
