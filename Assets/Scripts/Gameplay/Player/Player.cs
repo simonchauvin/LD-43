@@ -55,7 +55,7 @@ public class Player : MonoBehaviour
         transform.rotation = start.rotation;
 
         _rigidbody = GetComponent<Rigidbody>();
-        _rigidbody.velocity = Vector3.zero;
+        Stop();
         
         mainCamera = GetComponentInChildren<Camera>();
         mainCamera.orthographicSize = defaultCameraSize;
@@ -234,6 +234,11 @@ public class Player : MonoBehaviour
         movingBackward = false;
         rotateLeft = false;
         rotateRight = false;
+    }
+
+    public void Stop()
+    {
+        _rigidbody.velocity = Vector3.zero;
     }
 
     public void Interact(Entity entity)
