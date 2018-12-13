@@ -301,6 +301,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Entity" + entity + "loaded");
         loadedEntities.Add(entity);
+        player.AddFollower(entity.kind);
     }
 
     public void ShowTakeOrLeaveUI(string firstOption, string secondOption, string description)

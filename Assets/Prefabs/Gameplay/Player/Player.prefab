@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33031300917275670}
   - component: {fileID: 23257797051007064}
   - component: {fileID: 135968529332787436}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Head
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 33000716570128784}
   - component: {fileID: 23461332036799050}
   - component: {fileID: 136465220203653530}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Body
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -59,7 +59,7 @@ GameObject:
   - component: {fileID: 114089516497458482}
   - component: {fileID: 114206522905712404}
   - component: {fileID: 81831220268211976}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 4961911514994014}
   - component: {fileID: 20639600066570446}
   - component: {fileID: 114408028803426468}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Main Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -307,6 +307,14 @@ MonoBehaviour:
   maxShakeAmplitude: 2
   maxShakeStopDuration: 0.05
   timeToMoveHead: 0.4
+  knowledgeFollowerPrefab: {fileID: 4280524983041734, guid: b19741baafa42874c92b607a8c14a9a0,
+    type: 2}
+  peopleFollowerPrefab: {fileID: 4280524983041734, guid: 6efdb82ec5f663e4fa33fbf59412387e,
+    type: 2}
+  natureFollowerPrefab: {fileID: 4280524983041734, guid: 23c15c5175fd7a441beebad0aae129d0,
+    type: 2}
+  artFollowerPrefab: {fileID: 4280524983041734, guid: 3ee84cf76c60d474189e117123f8a301,
+    type: 2}
 --- !u!114 &114206522905712404
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -16,12 +16,18 @@ public class Player : MonoBehaviour
     public float maxShakeAmplitude;
     public float maxShakeStopDuration;
     public float timeToMoveHead;
+    public Transform knowledgeFollowerPrefab;
+    public Transform peopleFollowerPrefab;
+    public Transform natureFollowerPrefab;
+    public Transform artFollowerPrefab;
 
     private Planet planet;
+    private List<Transform> followers;
 
     private Rigidbody _rigidbody;
     private Transform head;
     private Camera mainCamera;
+    private Transform followersFolder;
     private Entity currentEntity;
 
     private Vector3 toPlanetVector;
@@ -54,11 +60,22 @@ public class Player : MonoBehaviour
         transform.position = start.position;
         transform.rotation = start.rotation;
 
+        if (followers != null)
+        {
+            for (int i = 0; i < followers.Count; i++)
+            {
+                Destroy(followers[i].gameObject);
+            }
+            followers.Clear();
+        }
+        followers = new List<Transform>();
+
         _rigidbody = GetComponent<Rigidbody>();
         Stop();
         
         mainCamera = GetComponentInChildren<Camera>();
         mainCamera.orthographicSize = defaultCameraSize;
+        followersFolder = transform.parent.Find("Followers");
         currentEntity = null;
         head.localPosition = originalHeadPosition;
 
@@ -213,6 +230,30 @@ public class Player : MonoBehaviour
                 }
                 headMoveTimer += Time.deltaTime;
             }
+
+            for (int i = 0; i < followers.Count; i++)
+            {
+                Rigidbody rigid = followers[i].GetComponent<Rigidbody>();
+                Vector3 gravityVector = planet.transform.position - rigid.position;
+                rigid.AddForce(gravityVector.normalized * (1f - Mathf.Clamp01((gravityVector.magnitude - planetRadius) / maxDistanceToPlanet)) * gravityForce);
+                rigid.rotation = Quaternion.FromToRotation(followers[i].up, -gravityVector.normalized) * rigid.rotation;
+
+                Vector3 toPreviousVector;
+                if (i == 0)
+                {
+                    toPreviousVector = transform.position - followers[i].position;
+                }
+                else
+                {
+                    toPreviousVector = followers[i - 1].position - followers[i].position;
+                }
+                float magnitude = toPreviousVector.magnitude;
+
+                if (magnitude > 2f)
+                {
+                    rigid.MovePosition(rigid.position + toPreviousVector.normalized * 10f * Time.deltaTime);
+                }
+            }
         }
     }
 
@@ -240,9 +281,48 @@ public class Player : MonoBehaviour
         rotateRight = false;
     }
 
+    public void AddFollower(EntityKind kind)
+    {
+        Vector3 point = Random.onUnitSphere * 2f;
+        if (followers.Count > 0)
+        {
+            point = followers[followers.Count - 1].position + new Vector3(point.x, 0, point.z);
+        }
+        else
+        {
+            point = transform.position + new Vector3(point.x, 0, point.z);
+        }
+
+        if ((point - planet.transform.position).magnitude - 1f <= planet.GetRadius())
+        {
+            point += (point - planet.transform.position).normalized * 1f;
+        }
+
+        switch (kind)
+        {
+            case EntityKind.Knowledge:
+                followers.Add(Instantiate(knowledgeFollowerPrefab, point, Quaternion.identity, followersFolder));
+                break;
+            case EntityKind.People:
+                followers.Add(Instantiate(peopleFollowerPrefab, point, Quaternion.identity, followersFolder));
+                break;
+            case EntityKind.Nature:
+                followers.Add(Instantiate(natureFollowerPrefab, point, Quaternion.identity, followersFolder));
+                break;
+            case EntityKind.Art:
+                followers.Add(Instantiate(artFollowerPrefab, point, Quaternion.identity, followersFolder));
+                break;
+        }
+    }
+
     public void Stop()
     {
         _rigidbody.velocity = Vector3.zero;
+
+        for (int i = 0; i < followers.Count; i++)
+        {
+            followers[i].GetComponent<Rigidbody>().velocity = Vector3.zero;
+        }
     }
 
     public void Interact(Entity entity)
