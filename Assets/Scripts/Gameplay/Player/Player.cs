@@ -45,6 +45,7 @@ public class Player : MonoBehaviour
     private float timerLerpCamera;
     private float headMoveTimer;
     private Vector3 originalHeadPosition;
+    private Vector3 originalCameraLocalPosition;
     private float startHeadHeight;
     private float targetHeadHeight;
 
@@ -92,6 +93,7 @@ public class Player : MonoBehaviour
         shakeStopDuration = 0;
         shakeStopDurationTimer = 0;
         timerLerpCamera = 0;
+        originalCameraLocalPosition = mainCamera.transform.localPosition;
         headMoveTimer = 0;
         startHeadHeight = head.localPosition.y;
         targetHeadHeight = originalHeadPosition.y + maxHeadHeight;
@@ -262,7 +264,7 @@ public class Player : MonoBehaviour
         if (shakeStopDurationTimer > shakeStopDuration)
         {
             Vector3 shake = Random.insideUnitCircle * Mathf.Lerp(0, maxShakeAmplitude, 1f - GameManager.instance.GetAsteroidDistanceToPlanetNormalized());
-            mainCamera.transform.localPosition += shake;
+            mainCamera.transform.localPosition = originalCameraLocalPosition + shake;
 
             shakeStopDuration = Random.Range(0, maxShakeStopDuration);
             shakeStopDurationTimer = 0;
