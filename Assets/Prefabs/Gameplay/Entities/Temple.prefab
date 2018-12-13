@@ -124,7 +124,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   kind: 3
   description: A temple
-  firstOption: Send everyone to the shuttle
+  firstOption: Take everyone to the shuttle
   secondOption: Leave them be
 --- !u!114 &114943981712943840
 MonoBehaviour:

@@ -124,7 +124,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   kind: 1
   description: A University
-  firstOption: Send everyone to the shuttle
+  firstOption: Take everyone to the shuttle
   secondOption: Leave them be
 --- !u!114 &114943981712943840
 MonoBehaviour:

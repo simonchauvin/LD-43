@@ -60,7 +60,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 90bcf75e285cb774aa37038bf6711516, type: 2}
+  - {fileID: 2100000, guid: 0b6237e81c13c724aaf4a058c4baad59, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -124,7 +124,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   kind: 1
   description: Offices
-  firstOption: Send everyone to the shuttle
+  firstOption: Take everyone to the shuttle
   secondOption: Leave them be
 --- !u!114 &114891137042341096
 MonoBehaviour:

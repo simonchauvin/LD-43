@@ -124,7 +124,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   kind: 2
   description: Housing
-  firstOption: Send everyone to the shuttle
+  firstOption: Take everyone to the shuttle
   secondOption: Leave them be
 --- !u!114 &114641706701976202
 MonoBehaviour:
