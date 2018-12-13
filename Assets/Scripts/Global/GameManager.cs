@@ -656,6 +656,10 @@ public class GameManager : MonoBehaviour
         return ready;
     }
 
+    public bool IsLeaving()
+    {
+        return leaving;
+    }
     public void GameOver()
     {
         Debug.Log("Game over");

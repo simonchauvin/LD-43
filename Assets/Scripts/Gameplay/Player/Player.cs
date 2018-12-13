@@ -155,6 +155,10 @@ public class Player : MonoBehaviour
 
             ShakeCamera();
         }
+        else if (GameManager.instance.IsLeaving())
+        {
+            ShakeCamera();
+        }
     }
 
     void FixedUpdate()
