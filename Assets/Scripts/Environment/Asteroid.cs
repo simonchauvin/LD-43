@@ -29,7 +29,7 @@ public class Asteroid : MonoBehaviour
         startDistance = (planetPosition - transform.position).magnitude - planetRadius - _collider.bounds.extents.x;
 
         audioSource = GetComponent<AudioSource>();
-        audioSource.outputAudioMixerGroup.audioMixer.SetFloat("Volume", 20f * (1f - GetDistanceToPlanetNormalized()));
+        audioSource.outputAudioMixerGroup.audioMixer.SetFloat("Volume", Mathf.Lerp(10f, 20f, 1f - GetDistanceToPlanetNormalized()));
     }
 
     void Update ()
@@ -41,7 +41,7 @@ public class Asteroid : MonoBehaviour
 
             transform.localScale = Vector3.one * Mathf.Lerp(1, maxScale, 1f - GetDistanceToPlanetNormalized());
 
-            audioSource.outputAudioMixerGroup.audioMixer.SetFloat("Volume", 20f * (1f - GetDistanceToPlanetNormalized()));
+            audioSource.outputAudioMixerGroup.audioMixer.SetFloat("Volume", Mathf.Lerp(10f, 20f, 1f - GetDistanceToPlanetNormalized()));
         }
 	}
 
