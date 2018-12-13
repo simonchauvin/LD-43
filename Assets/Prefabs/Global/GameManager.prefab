@@ -62,14 +62,10 @@ MonoBehaviour:
   targetLightColor: {r: 1, g: 0.53464276, b: 0.16509432, a: 1}
   fadePanelColor: {r: 0.14150941, g: 0.14150941, b: 0.14150941, a: 1}
   winConditionSettings:
-    minKnowledgeCount: 3
-    minPeopleCount: 6
-    minNatureCount: 2
-    minArtCount: 2
-    minKnowledgeProportion: 0.1
-    minPeopleProportion: 0.1
-    minNatureProportion: 0.1
-    minArtProportion: 0.1
+    minKnowledgeCount: 1
+    minPeopleCount: 1
+    minNatureCount: 1
+    minArtCount: 1
   winTexts:
     win: You found a way to make it work.
     tooFewKnowledge: You wandered aimlessly through the dark.
