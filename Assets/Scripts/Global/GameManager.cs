@@ -482,124 +482,44 @@ public class GameManager : MonoBehaviour
             if (knowLedgeProportion >= peopleProportion && knowLedgeProportion >= natureProportion && knowLedgeProportion >= artProportion) // First Knowledge
             {
                 texts[1] += "Through labor and ingenuity.";
-                if (peopleProportion > natureProportion && peopleProportion > artProportion) // Second People
-                {
-                    texts[2] += "Together as one.";
-                    if (natureProportion > artProportion) // Third Nature
-                    {
-                        texts[3] += "You held on to your faith.";
-                    }
-                    else if (artProportion >= natureProportion) // Third Art
-                    {
-                        texts[3] += "You dived into the unknown.";
-                    }
-                }
-                else if (natureProportion > peopleProportion && natureProportion > artProportion) // Second Nature
-                {
-                    texts[2] += "Knowing you had it in you.";
-                    if (peopleProportion > artProportion) // Third People
-                    {
-                        texts[3] += "You stood up as one.";
-                    }
-                    else if (artProportion >= peopleProportion) // Third Art
-                    {
-                        texts[3] += "You never lost hope.";
-                    }
-                }
-                else if (artProportion >= peopleProportion && artProportion >= natureProportion) // Second Art
+                if (artProportion >= peopleProportion && artProportion >= natureProportion) // Second Art
                 {
                     texts[2] += "Holding on to your dreams.";
                     if (peopleProportion >= natureProportion) // Third People
                     {
                         texts[3] += "You were legion.";
                     }
-                    else if (natureProportion > peopleProportion) // Third Nature
+                    else if (natureProportion >= peopleProportion) // Third Nature
                     {
                         texts[3] += "You knew deep down.";
                     }
                 }
-            }
-            else if (peopleProportion > knowLedgeProportion && peopleProportion > natureProportion && peopleProportion > artProportion) // First People
-            {
-                texts[1] += "Because you had each other.";
-                if (knowLedgeProportion >= natureProportion && knowLedgeProportion >= artProportion) // Second Knowledge
+                else if (peopleProportion >= natureProportion && peopleProportion >= artProportion) // Second People
                 {
-                    texts[2] += "Knowing the dangers ahead.";
-                    if (natureProportion > artProportion) // Third Nature
+                    texts[2] += "Together as one.";
+                    if (artProportion >= natureProportion) // Third Art
                     {
-                        texts[3] += "You stayed strong.";
+                        texts[3] += "You dived into the unknown.";
                     }
-                    else if (artProportion >= natureProportion) // Third Art
+                    else if (natureProportion >= artProportion) // Third Nature
                     {
-                        texts[3] += "You kept looking.";
+                        texts[3] += "You held on to your faith.";
                     }
                 }
-                else if (natureProportion > knowLedgeProportion && natureProportion > artProportion) // Second Nature
+                else if (natureProportion >= peopleProportion && natureProportion >= artProportion) // Second Nature
                 {
-                    texts[2] += "With faith and strength.";
-                    if (knowLedgeProportion >= artProportion) // Third Knowledge
+                    texts[2] += "Knowing you had it in you.";
+                    if (artProportion >= peopleProportion) // Third Art
                     {
-                        texts[3] += "You knew the way.";
+                        texts[3] += "You never lost hope.";
                     }
-                    else if (artProportion > knowLedgeProportion) // Third Art
+                    else if (peopleProportion >= artProportion) // Third People
                     {
-                        texts[3] += "You never stopped searching.";
-                    }
-                }
-                else if (artProportion > knowLedgeProportion && artProportion > natureProportion) // Second Art
-                {
-                    texts[2] += "Spirits leading the way.";
-                    if (knowLedgeProportion >= natureProportion) // Third Knowledge
-                    {
-                        texts[3] += "You are free.";
-                    }
-                    else if (natureProportion > knowLedgeProportion) // Third Nature
-                    {
-                        texts[3] += "You're all there is.";
+                        texts[3] += "You stood up as one.";
                     }
                 }
             }
-            else if (natureProportion > knowLedgeProportion && natureProportion > peopleProportion && natureProportion > artProportion) // First Nature
-            {
-                texts[1] += "Confident that you would remember.";
-                if (knowLedgeProportion >= peopleProportion && knowLedgeProportion >= artProportion) // Second Knowledge
-                {
-                    texts[2] += "Knowing all the answers.";
-                    if (peopleProportion > artProportion) // Third People
-                    {
-                        texts[3] += "You could stay united.";
-                    }
-                    else if (artProportion >= peopleProportion) // Third Art
-                    {
-                        texts[3] += "You kept trying.";
-                    }
-                }
-                else if (peopleProportion > knowLedgeProportion && peopleProportion > artProportion) // Second People
-                {
-                    texts[2] += "Sure to be surrounded.";
-                    if (knowLedgeProportion >= artProportion) // Third Knowledge
-                    {
-                        texts[3] += "You could forge the future.";
-                    }
-                    else if (artProportion > knowLedgeProportion) // Third Art
-                    {
-                        texts[3] += "You could choose.";
-                    }
-                }
-                else if (artProportion > knowLedgeProportion && artProportion > peopleProportion) // Second Art
-                {
-                    texts[2] += "Revived through hope.";
-                    if (knowledgeScore >= peopleProportion) // Third Knowledge
-                    {
-                        texts[3] += "You were certain of what's ahead.";
-                    }
-                    else if (peopleProportion > knowLedgeProportion) // Third People
-                    {
-                        texts[3] += "You held on to each other.";
-                    }
-                }
-            }
-            else if (artProportion > knowLedgeProportion && artProportion > peopleProportion && artProportion > natureProportion) // First Art
+            else if (artProportion >= knowLedgeProportion && artProportion >= peopleProportion && artProportion >= natureProportion) // First Art
             {
                 texts[1] += "Through your hopes and dreams.";
                 if (knowLedgeProportion >= peopleProportion && knowLedgeProportion >= natureProportion) // Second Knowledge
@@ -609,33 +529,113 @@ public class GameManager : MonoBehaviour
                     {
                         texts[3] += "You remained united.";
                     }
-                    else if (natureProportion > peopleProportion) // Third Nature
+                    else if (natureProportion >= peopleProportion) // Third Nature
                     {
                         texts[3] += "You kept believing.";
                     }
                 }
-                else if (peopleProportion > knowLedgeProportion && peopleProportion > natureProportion) // Second People
+                else if (peopleProportion >= knowLedgeProportion && peopleProportion >= natureProportion) // Second People
                 {
                     texts[2] += "Moving forward hand in hand.";
                     if (knowLedgeProportion >= natureProportion) // Third Knowledge
                     {
                         texts[3] += "You knew your worth.";
                     }
-                    else if (natureProportion > knowLedgeProportion) // Third Nature
+                    else if (natureProportion >= knowLedgeProportion) // Third Nature
                     {
                         texts[3] += "You never let go.";
                     }
                 }
-                else if (natureProportion > knowLedgeProportion && natureProportion > peopleProportion) // Second Nature
+                else if (natureProportion >= knowLedgeProportion && natureProportion >= peopleProportion) // Second Nature
                 {
                     texts[2] += "Believing that you had a purpose.";
                     if (knowLedgeProportion >= peopleProportion) // Third Knowledge
                     {
                         texts[3] += "You realized you could do anything.";
                     }
-                    else if (peopleProportion > knowLedgeProportion) // Third People
+                    else if (peopleProportion >= knowLedgeProportion) // Third People
                     {
                         texts[3] += "You clung to one another.";
+                    }
+                }
+            }
+            else if (peopleProportion >= knowLedgeProportion && peopleProportion >= natureProportion && peopleProportion >= artProportion) // First People
+            {
+                texts[1] += "Because you had each other.";
+                if (knowLedgeProportion >= natureProportion && knowLedgeProportion >= artProportion) // Second Knowledge
+                {
+                    texts[2] += "Knowing the dangers ahead.";
+                    if (artProportion >= natureProportion) // Third Art
+                    {
+                        texts[3] += "You kept looking.";
+                    }
+                    if (natureProportion >= artProportion) // Third Nature
+                    {
+                        texts[3] += "You stayed strong.";
+                    }
+                }
+                else if (artProportion >= knowLedgeProportion && artProportion >= natureProportion) // Second Art
+                {
+                    texts[2] += "Spirits leading the way.";
+                    if (knowLedgeProportion >= natureProportion) // Third Knowledge
+                    {
+                        texts[3] += "You are free.";
+                    }
+                    else if (natureProportion >= knowLedgeProportion) // Third Nature
+                    {
+                        texts[3] += "You're all there is.";
+                    }
+                }
+                else if (natureProportion >= knowLedgeProportion && natureProportion >= artProportion) // Second Nature
+                {
+                    texts[2] += "With faith and strength.";
+                    if (artProportion >= knowLedgeProportion) // Third Art
+                    {
+                        texts[3] += "You never stopped searching.";
+                    }
+                    else if (knowLedgeProportion >= artProportion) // Third Knowledge
+                    {
+                        texts[3] += "You knew the way.";
+                    }
+                }
+            }
+            else if (natureProportion >= knowLedgeProportion && natureProportion >= peopleProportion && natureProportion >= artProportion) // First Nature
+            {
+                texts[1] += "Confident that you would remember.";
+                if (knowLedgeProportion >= peopleProportion && knowLedgeProportion >= artProportion) // Second Knowledge
+                {
+                    texts[2] += "Knowing all the answers.";
+                    if (artProportion >= peopleProportion) // Third Art
+                    {
+                        texts[3] += "You kept trying.";
+                    }
+                    else if (peopleProportion >= artProportion) // Third People
+                    {
+                        texts[3] += "You could stay united.";
+                    }
+                }
+                else if (artProportion >= knowLedgeProportion && artProportion >= peopleProportion) // Second Art
+                {
+                    texts[2] += "Revived through hope.";
+                    if (knowledgeScore >= peopleProportion) // Third Knowledge
+                    {
+                        texts[3] += "You were certain of what's ahead.";
+                    }
+                    else if (peopleProportion >= knowLedgeProportion) // Third People
+                    {
+                        texts[3] += "You held on to each other.";
+                    }
+                }
+                else if (peopleProportion >= knowLedgeProportion && peopleProportion >= artProportion) // Second People
+                {
+                    texts[2] += "Sure to be surrounded.";
+                    if (knowLedgeProportion >= artProportion) // Third Knowledge
+                    {
+                        texts[3] += "You could forge the future.";
+                    }
+                    else if (artProportion >= knowLedgeProportion) // Third Art
+                    {
+                        texts[3] += "You could choose.";
                     }
                 }
             }
@@ -661,6 +661,7 @@ public class GameManager : MonoBehaviour
     {
         return leaving;
     }
+
     public void GameOver()
     {
         Debug.Log("Game over");
